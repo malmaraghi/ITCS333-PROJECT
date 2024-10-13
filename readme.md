@@ -25,7 +25,7 @@ This repository will serve as the central hub for managing our ITCS333 project. 
 
 This is the official repository for our project, where all the contributions from the group members will be merged. Any further updates and changes can be tracked here:
 
-[GitHub Repository Link](https://github.com/malmaraghi/ITCS333-PROJECT.gitt)
+[GitHub Repository Link](https://github.com/malmaraghi/ITCS333-PROJECT.git)
 
 ## Contribution Guidelines
 
