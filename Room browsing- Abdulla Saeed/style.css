@@ -1,0 +1,85 @@
+/* style.css */
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.large-selector {
+  font-size: 1.2em; /* Slightly reduced size */
+}
+
+.large-selector button {
+  display: block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  cursor: pointer; /* Ensure buttons are clickable */
+}
+
+.selectors {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background to prevent overlap */
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 200px; /* Adjust the width as needed */
+  z-index: 10; /* Ensure selectors are on top */
+}
+
+.room-grid-container {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floor-plan {
+  display: block;
+  margin: 0 auto;
+}
+
+.room-grid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.room {
+  position: absolute;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 20; /* Ensure modal is on top */
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

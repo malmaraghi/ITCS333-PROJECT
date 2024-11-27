@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Booking System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="datePicker" class="center">
+    <h1>Select Date and Time</h1>
+    <label for="date">Select Date:</label>
+    <select id="date" class="large-selector">
+      <option value="2024-11-22">22/11/2024</option>
+      <option value="2024-11-23">23/11/2024</option>
+      <option value="2024-11-24">24/11/2024</option>
+    </select>
+    <label for="time">Select Time:</label>
+    <select id="time" class="large-selector">
+      <option value="08:00">08:00 AM</option>
+      <option value="12:00">12:00 PM</option>
+      <option value="16:00">04:00 PM</option>
+    </select>
+    <button id="submitDateTime">Submit</button>
+  </div>
+
+  <div id="roomOverview" class="hidden">
+    <header>
+      <h1>Room Booking System</h1>
+      <p id="selectedDateTime"></p>
+      <div class="selectors">
+        <label for="area">Select Area:</label>
+        <div id="areaButtons" class="large-selector">
+          <button data-area="ITIS">ITIS</button>
+          <button data-area="ITCS">ITCS</button>
+          <button data-area="ITCE">ITCE</button>
+        </div>
+        <label for="floor">Select Floor:</label>
+        <div id="floorButtons" class="large-selector">
+          <button data-floor="1">Floor 1</button>
+          <button data-floor="2">Floor 2</button>
+          <button data-floor="3">Floor 3</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="room-grid-container">
+      <img src="floor-plan.png" alt="Floor Plan" class="floor-plan">
+      <div class="room-grid">
+      </div>
+    </main>
+  </div>
+
+  <div id="roomInfoModal" class="hidden">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Room Information</h2>
+      <p id="roomInfo"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
