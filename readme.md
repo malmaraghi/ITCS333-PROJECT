@@ -13,13 +13,13 @@ This repository will serve as the central hub for managing our ITCS333 project. 
 
 ## Group Members
 
-| #  | Name                      | Student ID | Section |
-|----|---------------------------|------------|---------|
-| 1  | Mohamed Adnan Almaraghi    | 202101655  | Sec 09  |
-| 2  | Mahmood Raed Alsayyed      | 202209657  | Sec 01  |
-| 3  | Abdulla Saeed Alkhanaizi   | 202208891  | Sec 01  |
-| 4  | Fawaz Adel Almeer          | 202011989  | Sec 01  |
-| 5  | Ammar Ali Alasfoor         | 202203136  | Sec 01  |
+| #  | Name                      | Student ID | Section | Task                         |
+|----|---------------------------|------------|---------|------------------------------|
+| 1  | Mohamed Adnan Almaraghi    | 202101655  | Sec 09  | Booking System               |
+| 2  | Mahmood Raed Alsayyed      | 202209657  | Sec 01  | User Profile Management      |
+| 3  | Abdulla Saeed Alkhanaizi   | 202208891  | Sec 01  | Room Browsing and Details    |
+| 4  | Fawaz Adel Almeer          | 202011989  | Sec 01  | Admin Panel                  |
+| 5  | Ammar Ali Alasfoor         | 202203136  | Sec 01  | User Registration and Login  |
 
 ## GitHub Repository
 
