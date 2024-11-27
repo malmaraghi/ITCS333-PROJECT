@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+    margin: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #227a35;
+    margin: 20px;
+}
+
+
+
+.feedback-message {
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    width: 60%;
+    background-color: #f1f1f1;
+    color: #333; 
+}
+
+
+
+form {
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+
+
+.bookings-container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bookings-table th, .bookings-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.bookings-table thead {
+    background: #227a35;
+    color: white;
+}
+
+.bookings-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.cancel-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background: #c82333;
+}
+
+
+@media (max-width: 768px) {
+    form, .bookings-container {
+        width: 95%;
+    }
+}
