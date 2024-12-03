@@ -1,69 +1,56 @@
-const roomData = [{ id: "ITIS-101", area: "ITIS", floor: 1, status: "available", type: "Class" },
-{ id: "ITIS-102", area: "ITIS", floor: 1, status: "occupied", type: "Lab" },
-{ id: "ITIS-103", area: "ITIS", floor: 1, status: "unavailable", type: "Class" },
-{ id: "ITIS-201", area: "ITIS", floor: 2, status: "available", type: "Lab" },
-{ id: "ITIS-202", area: "ITIS", floor: 2, status: "occupied", type: "Class" },
-{ id: "ITIS-301", area: "ITIS", floor: 3, status: "unavailable", type: "Lab" },
-{ id: "ITIS-302", area: "ITIS", floor: 3, status: "available", type: "Class" },
-{ id: "ITIS-303", area: "ITIS", floor: 3, status: "available", type: "Lab" },
-{ id: "ITIS-304", area: "ITIS", floor: 3, status: "occupied", type: "Class" },
-{ id: "ITIS-305", area: "ITIS", floor: 3, status: "unavailable", type: "Lab" },
-{ id: "ITCS-101", area: "ITCS", floor: 1, status: "occupied", type: "Class" },
-{ id: "ITCS-102", area: "ITCS", floor: 1, status: "available", type: "Lab" },
-{ id: "ITCS-201", area: "ITCS", floor: 2, status: "unavailable", type: "Class" },
-{ id: "ITCS-202", area: "ITCS", floor: 2, status: "available", type: "Lab" },
-{ id: "ITCS-301", area: "ITCS", floor: 3, status: "occupied", type: "Class" },
-{ id: "ITCS-302", area: "ITCS", floor: 3, status: "available", type: "Lab" },
-{ id: "ITCS-303", area: "ITCS", floor: 3, status: "available", type: "Class" },
-{ id: "ITCS-304", area: "ITCS", floor: 3, status: "occupied", type: "Lab" },
-{ id: "ITCS-305", area: "ITCS", floor: 3, status: "unavailable", type: "Class" },
-{ id: "ITCE-101", area: "ITCE", floor: 1, status: "available", type: "Lab" },
-{ id: "ITCE-102", area: "ITCE", floor: 1, status: "unavailable", type: "Class" },
-{ id: "ITCE-103", area: "ITCE", floor: 1, status: "occupied", type: "Lab" },
-{ id: "ITCE-201", area: "ITCE", floor: 2, status: "available", type: "Class" },
-{ id: "ITCE-202", area: "ITCE", floor: 2, status: "occupied", type: "Lab" },
-{ id: "ITCE-203", area: "ITCE", floor: 2, status: "unavailable", type: "Class" },
-{ id: "ITCE-301", area: "ITCE", floor: 3, status: "available", type: "Lab" },
-{ id: "ITCE-302", area: "ITCE", floor: 3, status: "occupied", type: "Class" },
-{ id: "ITCE-303", area: "ITCE", floor: 3, status: "available", type: "Lab" },
-{ id: "ITCE-304", area: "ITCE", floor: 3, status: "unavailable", type: "Class" }
-  ,];
+// Fetch room data from PHP backend
+async function fetchRoomData() {
+  try {
+    const response = await fetch("http://localhost/ITCS333/ITCS333-PROJECT/Room%20browsing%20-%20Abdulla%20Saeed/getRooms.PHP");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching room data:", error);
+    return [];
+  }
+}
 
-const datePicker = document.getElementById("datePicker");
-const roomOverview = document.getElementById("roomOverview");
-const submitDateTime = document.getElementById("submitDateTime");
-const selectedDateTime = document.getElementById("selectedDateTime");
-const roomGrid = document.querySelector(".room-grid");
-const areaButtons = document.getElementById("areaButtons");
-const floorButtons = document.getElementById("floorButtons");
-const roomInfoModal = document.getElementById("roomInfoModal");
-const roomInfo = document.getElementById("roomInfo");
-const closeModal = document.querySelector(".close");
+// Render rooms in grid layout
+async function renderRooms(department, floor) {
+  const roomData = await fetchRoomData();
 
-let selectedArea = "ITIS";
-let selectedFloor = 1;
-
-function renderRooms(area, floor) {
+  // Clear previous content
+  const roomGrid = document.getElementById("roomGrid");
   roomGrid.innerHTML = "";
 
+  // Filter rooms based on selected department and floor
   const filteredRooms = roomData.filter(
-    (room) => room.area === area && room.floor === parseInt(floor)
+    (room) => room.room_department === department && room.room_floor === parseInt(floor)
   );
 
+  // Render each room
   filteredRooms.forEach((room) => {
     const roomDiv = document.createElement("div");
-    roomDiv.className = `room ${room.status}`;
-    roomDiv.textContent = room.id;
-    roomDiv.style.top = room.top;
-    roomDiv.style.left = room.left;
+    roomDiv.className = `room available`;
+    roomDiv.innerHTML = `
+      <strong>${room.room_name}</strong><br>
+      Capacity: ${room.capacity}<br>
+      Equipment: ${room.equipment}
+    `;
 
+    // Add click event for room details
     roomDiv.addEventListener("click", () => {
-      displayRoomInfo(room);
+      alert(
+        `Room Name: ${room.room_name}\nCapacity: ${room.capacity}\nEquipment: ${room.equipment}`
+      );
     });
 
     roomGrid.appendChild(roomDiv);
   });
 }
+
+// Handle date and time submission
+const submitDateTime = document.getElementById("submitDateTime");
+const datePicker = document.getElementById("datePicker");
+const roomOverview = document.getElementById("roomOverview");
+const selectedDateTime = document.getElementById("selectedDateTime");
+const areaSelector = document.getElementById("areaSelector");
+const floorSelector = document.getElementById("floorSelector");
 
 submitDateTime.addEventListener("click", () => {
   const date = document.getElementById("date").value;
@@ -74,30 +61,20 @@ submitDateTime.addEventListener("click", () => {
     return;
   }
 
+  // Hide date picker and show room overview
   datePicker.classList.add("hidden");
   roomOverview.classList.remove("hidden");
 
+  // Display selected date and render initial room grid
   selectedDateTime.textContent = `Selected Date & Time: ${date} ${time}`;
-  renderRooms(selectedArea, selectedFloor);
+  renderRooms(areaSelector.value, floorSelector.value);
 });
 
-areaButtons.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
-    selectedArea = event.target.dataset.area;
-    renderRooms(selectedArea, selectedFloor);
-  }
+// Update rooms on department or floor change
+areaSelector.addEventListener("change", () => {
+  renderRooms(areaSelector.value, floorSelector.value);
 });
 
-floorButtons.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
-    selectedFloor = event.target.dataset.floor;
-    renderRooms(selectedArea, selectedFloor);
-  }
+floorSelector.addEventListener("change", () => {
+  renderRooms(areaSelector.value, floorSelector.value);
 });
-
-function displayRoomInfo(room) {
-  roomInfo.textContent = `ID: ${room.id}\nArea: ${room.area}\nFloor: ${room.floor}\nStatus: ${room.status}\nType: ${room.type}`;
-  roomInfoModal.classList.remove("hidden");
-}
-
-close
