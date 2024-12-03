@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../config.php');
+include('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $booking_id = $_POST['booking_id'];
@@ -11,16 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$booking_id]);
 
         // Redirect back with success message
-        header("Location: index.php?status=cancel_success");
-        exit();
+        header("Location: ../Room browsing - Abdulla Saeed/index.php?status=success");
+        exit;
+
     } catch (PDOException $e) {
         // Handle database errors
-        header("Location: index.php?status=error");
+        header("Location: ../Room browsing - Abdulla Saeed/index.php?status=error");
         exit();
     }
 } else {
     // Invalid request
-    header("Location: index.php?status=invalid");
+    header("Location: ../Room browsing - Abdulla Saeed/index.php?status=invalid");
     exit();
 }
 ?>
