@@ -1,3 +1,5 @@
+// This part is not used anymore and is implemented in Abdulla's index.php file
+
 <?php
 include('config.php'); 
 
