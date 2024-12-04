@@ -1,0 +1,106 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling to center content */
+body {
+    display: flex; /* Flexbox for centering */
+    flex-direction: column;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
+    background-size: 400% 400%;
+    animation: gradientMotion 8s ease infinite;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Keyframes for background motion effect */
+@keyframes gradientMotion {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Form container styling */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Light translucent background */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 300px; /* Set fixed width */
+    margin: 10px;
+}
+
+/* Form elements */
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 15px; /* Add space between elements */
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-container input,
+.form-container select {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.form-container button {
+    background-color: #3a2f8a;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #5340b1;
+}
+
+/* Button container for form selection buttons */
+.button-container2 {
+    display: flex;
+    gap: 20px; /* Space between the two buttons */
+    margin-top: 20px;
+}
+
+.form-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c63ff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #5340b1;
+}
