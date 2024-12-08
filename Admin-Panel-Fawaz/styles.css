@@ -1,42 +1,46 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-}
-
-.container {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-}
-
-h1, h2 {
-    text-align: center;
-    color: #333;
-}
-
 .table-section, .chart-section {
-    margin: 20px 0;
-    background: #fff;
+    margin: 20px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
+.table-section {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+.chart-section {
+    background: linear-gradient(135deg, #f0f9ff, #cce7ff);
+}
+
+.content-header h1 {
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 table th {
-    background: #f4f4f4;
-    color: #333;
+    background-color: #007bff;
+    color: white;
+}
+
+table td {
+    text-align: center;
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+}
+
+.small-box {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.small-box h3 {
+    font-size: 2.2em;
+}
+
+.small-box i {
+    font-size: 4em;
 }

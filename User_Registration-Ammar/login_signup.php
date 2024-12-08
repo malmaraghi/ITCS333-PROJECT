@@ -24,10 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check if session data is set properly
             if (isset($_SESSION['user'])) {
                 echo "Login successful. Welcome, " . $_SESSION['user']['username'];
-                if ($user['account_type'] === 'admin') {
-                    header("Location: admin_dashboard.php");
+                if ($user['account_type'] === 'Admin') {
+                    header("Location: ../Admin-Panel-Fawaz/index.php");
                     exit();
-                } else {
+                } else if ($user['account_type'] === 'User') {
                     header("Location: ../Room browsing - Abdulla Saeed/index.php");
                     exit();
                 }
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'account_type' => $accountType
                 ];
 
-                echo "Account created successfully.";
+                header("Location: user_dashboard.php");
             }
         }
     }

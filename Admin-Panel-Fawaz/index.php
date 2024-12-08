@@ -1,3 +1,38 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "room_booking"; // Replace with your database name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch bookings with user and room details
+$sql = "SELECT b.booking_id, b.status AS booking_status, b.start_time, b.end_time,
+               u.username, u.email, r.room_name, r.room_department, r.room_type
+        FROM bookings b
+        INNER JOIN users u ON b.user_id = u.id
+        INNER JOIN rooms r ON b.room_id = r.room_id";
+$result = $conn->query($sql);
+
+// Fetch data for pie chart
+$pieChartSql = "SELECT room_department, COUNT(*) AS count
+                FROM rooms
+                GROUP BY room_department";
+$pieChartResult = $conn->query($pieChartSql);
+$chartData = [];
+while ($row = $pieChartResult->fetch_assoc()) {
+    $chartData[] = ['department' => $row['room_department'], 'count' => $row['count']];
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,54 +42,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .table-section, .chart-section {
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-section {
-            background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
-        }
-
-        .chart-section {
-            background: linear-gradient(135deg, #f0f9ff, #cce7ff);
-        }
-
-        .content-header h1 {
-            color: #007bff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        table th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        table td {
-            text-align: center;
-        }
-
-        .bg-gradient-info {
-            background: linear-gradient(135deg, #17a2b8, #138496);
-        }
-
-        .small-box {
-            text-align: center;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .small-box h3 {
-            font-size: 2.2em;
-        }
-
-        .small-box i {
-            font-size: 4em;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
