@@ -12,6 +12,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Fetch total bookings count
+$totalBookingsSql = "SELECT COUNT(*) AS total FROM bookings";
+$totalBookingsResult = $conn->query($totalBookingsSql);
+$totalBookings = $totalBookingsResult->fetch_assoc()['total'] ?? 0;
+
+// Fetch available rooms count
+$availableRoomsSql = "SELECT COUNT(*) AS total FROM rooms WHERE status = 'available'";
+$availableRoomsResult = $conn->query($availableRoomsSql);
+$availableRooms = $availableRoomsResult->fetch_assoc()['total'] ?? 0;
+
+// Fetch occupied rooms count
+$occupiedRoomsSql = "SELECT COUNT(*) AS total FROM rooms WHERE status = 'occupied'";
+$occupiedRoomsResult = $conn->query($occupiedRoomsSql);
+$occupiedRooms = $occupiedRoomsResult->fetch_assoc()['total'] ?? 0;
+
 // Fetch bookings with user and room details
 $sql = "SELECT b.booking_id, b.status AS booking_status, b.start_time, b.end_time,
                u.username, u.email, r.room_name, r.room_department, r.room_type
@@ -35,6 +50,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,6 +60,7 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <div class="content-wrapper">
@@ -119,20 +136,21 @@ $conn->close();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            if ($result && $result->num_rows > 0): 
+                            <?php
+                            if ($result && $result->num_rows > 0):
                                 while ($row = $result->fetch_assoc()): ?>
                                     <tr>
                                         <td><?= htmlspecialchars($row['booking_id']) ?></td>
                                         <td><?= htmlspecialchars($row['room_name']) ?></td>
-                                        <td><?= htmlspecialchars($row['username']) ?> (<?= htmlspecialchars($row['email']) ?>)</td>
+                                        <td><?= htmlspecialchars($row['username']) ?> (<?= htmlspecialchars($row['email']) ?>)
+                                        </td>
                                         <td><?= htmlspecialchars($row['room_department']) ?></td>
                                         <td><?= htmlspecialchars($row['room_type']) ?></td>
                                         <td><?= htmlspecialchars($row['booking_status']) ?></td>
                                         <td><?= htmlspecialchars($row['start_time']) ?></td>
                                         <td><?= htmlspecialchars($row['end_time']) ?></td>
                                     </tr>
-                                <?php endwhile; 
+                                <?php endwhile;
                             else: ?>
                                 <tr>
                                     <td colspan="8">No bookings available</td>
@@ -147,9 +165,12 @@ $conn->close();
             <section class="content">
                 <div class="container-fluid chart-section">
                     <h2>Room Usage by Department</h2>
-                    <canvas id="pieChart"></canvas>
+                    <div style="width: 400px; height: 400px; margin: auto;">
+                        <canvas id="pieChart"></canvas>
+                    </div>
                 </div>
             </section>
+
         </div>
     </div>
 
@@ -173,4 +194,5 @@ $conn->close();
         });
     </script>
 </body>
+
 </html>
