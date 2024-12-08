@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2024 at 07:01 PM
+-- Generation Time: Dec 08, 2024 at 08:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `user_id`, `room_id`, `start_time`, `end_time`, `status`) VALUES
-(12, 4, 10, '2024-12-10 08:43:00.000000', '2024-12-10 09:43:00.000000', '');
+(12, 4, 10, '2024-12-10 08:43:00.000000', '2024-12-10 09:43:00.000000', ''),
+(13, 4, 9, '2024-12-08 10:08:00.000000', '2024-12-08 11:08:00.000000', '');
 
 -- --------------------------------------------------------
 
@@ -65,26 +66,78 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `equipment`, `room_department`, `room_floor`, `status`, `room_type`) VALUES
-(1, 'ITCS-101', 50, 'Projector, Whiteboard', 'ITCS', 1, 'available', 'Lecture Room'),
-(2, 'ITCE-202', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'occupied', 'Computer Lab'),
-(3, 'ITIS-303', 20, 'TV Screen, Conference Table', 'ITIS', 1, 'unavailable', 'Lecture Room'),
-(4, 'ITCS-104', 50, 'Projector, Whiteboard', 'ITCS', 1, 'occupied', 'Lecture Room'),
-(5, 'ITCE-205', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'available', 'Computer Lab'),
-(6, 'ITIS-306', 20, 'TV Screen, Conference Table', 'ITIS', 3, 'occupied', 'Meeting Room'),
-(7, 'ITCS-107', 50, 'Projector, Whiteboard', 'ITCS', 1, 'unavailable', 'Lecture Room'),
-(8, 'ITCE-208', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'occupied', 'Computer Lab'),
-(9, 'ITIS-309', 20, 'TV Screen, Conference Table', 'ITIS', 3, 'available', 'Meeting Room'),
-(10, 'ITCS-110', 50, 'Projector, Whiteboard', 'ITCS', 1, 'available', 'Lecture Room'),
-(11, 'ITCE-211', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'unavailable', 'Computer Lab'),
-(12, 'ITIS-312', 20, 'TV Screen, Conference Table', 'ITIS', 3, 'occupied', 'Meeting Room'),
-(13, 'ITCS-113', 50, 'Projector, Whiteboard', 'ITCS', 1, 'occupied', 'Lecture Room'),
-(14, 'ITCE-214', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'available', 'Computer Lab'),
-(15, 'ITIS-315', 20, 'TV Screen, Conference Table', 'ITIS', 3, 'available', 'Meeting Room'),
-(16, 'ITCS-116', 50, 'Projector, Whiteboard', 'ITCS', 1, 'unavailable', 'Lecture Room'),
-(17, 'ITCE-217', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'occupied', 'Computer Lab'),
-(18, 'ITIS-318', 20, 'TV Screen, Conference Table', 'ITIS', 3, 'unavailable', 'Meeting Room'),
-(19, 'ITCS-119', 50, 'Projector, Whiteboard', 'ITCS', 1, 'available', 'Lecture Room'),
-(20, 'ITCE-220', 30, 'Computers, Lab Equipment', 'ITCE', 2, 'unavailable', 'Computer Lab');
+(1, 'ITCS-1001', 18, 'Projector, Whiteboard, Air Conditioner', 'ITCS', 1, 'Available', 'Meeting Room'),
+(2, 'ITCS-1002', 50, 'Computers, Air Conditioner', 'ITCS', 1, 'Occupied', 'Computer Lab'),
+(3, 'ITCS-1003', 22, 'Whiteboard, Speakers', 'ITCS', 1, 'Unavailable', 'Lecture Room'),
+(4, 'ITCS-1004', 50, 'Projector, Computers', 'ITCS', 1, 'Available', 'Computer Lab'),
+(5, 'ITCS-2001', 18, 'Whiteboard, Air Conditioner', 'ITCS', 2, 'Occupied', 'Meeting Room'),
+(6, 'ITCS-2002', 50, 'Computers, Speakers', 'ITCS', 2, 'Available', 'Computer Lab'),
+(7, 'ITCS-2003', 22, 'Projector, Air Conditioner', 'ITCS', 2, 'Unavailable', 'Lecture Room'),
+(8, 'ITCS-2004', 18, 'Whiteboard, Projector', 'ITCS', 2, 'Occupied', 'Meeting Room'),
+(9, 'ITCS-3001', 22, 'Speakers, Whiteboard', 'ITCS', 3, 'Available', 'Lecture Room'),
+(10, 'ITCS-3002', 50, 'Computers, Air Conditioner', 'ITCS', 3, 'Unavailable', 'Computer Lab'),
+(11, 'ITCS-3003', 18, 'Projector, Whiteboard', 'ITCS', 3, 'Occupied', 'Meeting Room'),
+(12, 'ITCS-3004', 22, 'Whiteboard, Projector', 'ITCS', 3, 'Available', 'Lecture Room'),
+(13, 'ITCS-1005', 50, 'Computers, Projector', 'ITCS', 1, 'Available', 'Computer Lab'),
+(14, 'ITCS-1006', 22, 'Speakers, Air Conditioner', 'ITCS', 1, 'Unavailable', 'Lecture Room'),
+(15, 'ITCS-1007', 18, 'Whiteboard, Air Conditioner', 'ITCS', 1, 'Occupied', 'Meeting Room'),
+(16, 'ITCS-1008', 22, 'Projector, Whiteboard', 'ITCS', 1, 'Available', 'Lecture Room'),
+(17, 'ITCS-2005', 50, 'Computers, Whiteboard', 'ITCS', 2, 'Available', 'Computer Lab'),
+(18, 'ITCS-2006', 18, 'Whiteboard, Projector', 'ITCS', 2, 'Occupied', 'Meeting Room'),
+(19, 'ITCS-2007', 50, 'Computers, Air Conditioner', 'ITCS', 2, 'Unavailable', 'Computer Lab'),
+(20, 'ITCS-2008', 22, 'Projector, Speakers', 'ITCS', 2, 'Available', 'Lecture Room'),
+(21, 'ITCS-3005', 22, 'Whiteboard, Air Conditioner', 'ITCS', 3, 'Occupied', 'Lecture Room'),
+(22, 'ITCS-3006', 50, 'Computers, Projector', 'ITCS', 3, 'Available', 'Computer Lab'),
+(23, 'ITCS-3007', 18, 'Projector, Whiteboard', 'ITCS', 3, 'Unavailable', 'Meeting Room'),
+(24, 'ITCS-3008', 50, 'Computers, Speakers', 'ITCS', 3, 'Occupied', 'Computer Lab'),
+(25, 'ITIS-1001', 18, 'Projector, Whiteboard, Air Conditioner', 'ITIS', 1, 'Available', 'Meeting Room'),
+(26, 'ITIS-1002', 22, 'Whiteboard, Speakers', 'ITIS', 1, 'Occupied', 'Lecture Room'),
+(27, 'ITIS-1003', 50, 'Computers, Air Conditioner', 'ITIS', 1, 'Unavailable', 'Computer Lab'),
+(28, 'ITIS-1004', 22, 'Projector, Air Conditioner', 'ITIS', 1, 'Available', 'Lecture Room'),
+(29, 'ITIS-2001', 18, 'Whiteboard, Projector', 'ITIS', 2, 'Occupied', 'Meeting Room'),
+(30, 'ITIS-2002', 50, 'Computers, Speakers', 'ITIS', 2, 'Available', 'Computer Lab'),
+(31, 'ITIS-2003', 22, 'Projector, Whiteboard', 'ITIS', 2, 'Unavailable', 'Lecture Room'),
+(32, 'ITIS-2004', 50, 'Computers, Air Conditioner', 'ITIS', 2, 'Available', 'Computer Lab'),
+(33, 'ITIS-3001', 22, 'Whiteboard, Projector', 'ITIS', 3, 'Occupied', 'Lecture Room'),
+(34, 'ITIS-3002', 50, 'Computers, Whiteboard', 'ITIS', 3, 'Available', 'Computer Lab'),
+(35, 'ITIS-3003', 18, 'Whiteboard, Air Conditioner', 'ITIS', 3, 'Unavailable', 'Meeting Room'),
+(36, 'ITIS-3004', 22, 'Projector, Speakers', 'ITIS', 3, 'Occupied', 'Lecture Room'),
+(37, 'ITIS-1005', 50, 'Computers, Projector', 'ITIS', 1, 'Available', 'Computer Lab'),
+(38, 'ITIS-1006', 18, 'Projector, Whiteboard', 'ITIS', 1, 'Occupied', 'Meeting Room'),
+(39, 'ITIS-1007', 22, 'Speakers, Whiteboard', 'ITIS', 1, 'Unavailable', 'Lecture Room'),
+(40, 'ITIS-1008', 50, 'Computers, Air Conditioner', 'ITIS', 1, 'Available', 'Computer Lab'),
+(41, 'ITIS-2005', 18, 'Whiteboard, Air Conditioner', 'ITIS', 2, 'Occupied', 'Meeting Room'),
+(42, 'ITIS-2006', 50, 'Computers, Speakers', 'ITIS', 2, 'Unavailable', 'Computer Lab'),
+(43, 'ITIS-2007', 22, 'Projector, Air Conditioner', 'ITIS', 2, 'Available', 'Lecture Room'),
+(44, 'ITIS-2008', 50, 'Computers, Whiteboard', 'ITIS', 2, 'Occupied', 'Computer Lab'),
+(45, 'ITIS-3005', 18, 'Projector, Whiteboard', 'ITIS', 3, 'Available', 'Meeting Room'),
+(46, 'ITIS-3006', 50, 'Computers, Air Conditioner', 'ITIS', 3, 'Unavailable', 'Computer Lab'),
+(47, 'ITIS-3007', 22, 'Whiteboard, Projector', 'ITIS', 3, 'Occupied', 'Lecture Room'),
+(48, 'ITIS-3008', 50, 'Computers, Speakers', 'ITIS', 3, 'Available', 'Computer Lab'),
+(49, 'ITCE-1001', 22, 'Projector, Whiteboard, Air Conditioner', 'ITCE', 1, 'Available', 'Lecture Room'),
+(50, 'ITCE-1002', 50, 'Computers, Speakers', 'ITCE', 1, 'Unavailable', 'Computer Lab'),
+(51, 'ITCE-1003', 18, 'Whiteboard, Air Conditioner', 'ITCE', 1, 'Occupied', 'Meeting Room'),
+(52, 'ITCE-1004', 22, 'Whiteboard, Projector', 'ITCE', 1, 'Available', 'Lecture Room'),
+(53, 'ITCE-2001', 50, 'Computers, Air Conditioner', 'ITCE', 2, 'Occupied', 'Computer Lab'),
+(54, 'ITCE-2002', 22, 'Projector, Speakers', 'ITCE', 2, 'Available', 'Lecture Room'),
+(55, 'ITCE-2003', 18, 'Whiteboard, Air Conditioner', 'ITCE', 2, 'Unavailable', 'Meeting Room'),
+(56, 'ITCE-2004', 50, 'Computers, Whiteboard', 'ITCE', 2, 'Occupied', 'Computer Lab'),
+(57, 'ITCE-3001', 22, 'Speakers, Projector', 'ITCE', 3, 'Available', 'Lecture Room'),
+(58, 'ITCE-3002', 50, 'Computers, Whiteboard', 'ITCE', 3, 'Available', 'Computer Lab'),
+(59, 'ITCE-3003', 18, 'Projector, Air Conditioner', 'ITCE', 3, 'Occupied', 'Meeting Room'),
+(60, 'ITCE-3004', 50, 'Computers, Air Conditioner', 'ITCE', 3, 'Occupied', 'Computer Lab'),
+(61, 'ITCE-1005', 18, 'Whiteboard, Projector', 'ITCE', 1, 'Available', 'Meeting Room'),
+(62, 'ITCE-1006', 50, 'Computers, Projector', 'ITCE', 1, 'Unavailable', 'Computer Lab'),
+(63, 'ITCE-1007', 22, 'Projector, Whiteboard', 'ITCE', 1, 'Occupied', 'Lecture Room'),
+(64, 'ITCE-1008', 50, 'Computers, Air Conditioner', 'ITCE', 1, 'Available', 'Computer Lab'),
+(65, 'ITCE-2005', 22, 'Whiteboard, Air Conditioner', 'ITCE', 2, 'Unavailable', 'Lecture Room'),
+(66, 'ITCE-2006', 50, 'Computers, Projector', 'ITCE', 2, 'Occupied', 'Computer Lab'),
+(67, 'ITCE-2007', 22, 'Whiteboard, Speakers', 'ITCE', 2, 'Available', 'Lecture Room'),
+(68, 'ITCE-2008', 50, 'Computers, Air Conditioner', 'ITCE', 2, 'Available', 'Computer Lab'),
+(69, 'ITCE-3005', 22, 'Projector, Whiteboard', 'ITCE', 3, 'Occupied', 'Lecture Room'),
+(70, 'ITCE-3006', 50, 'Computers, Air Conditioner', 'ITCE', 3, 'Available', 'Computer Lab'),
+(71, 'ITCE-3007', 18, 'Whiteboard, Projector', 'ITCE', 3, 'Unavailable', 'Meeting Room'),
+(72, 'ITCE-3008', 50, 'Computers, Speakers', 'ITCE', 3, 'Occupied', 'Computer Lab');
 
 -- --------------------------------------------------------
 
@@ -146,13 +199,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `booking_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `room_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `users`
