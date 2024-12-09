@@ -1,9 +1,9 @@
 <?php
-if (isset($_SESSION['user'])) {
-    echo "Session Data: " . print_r($_SESSION['user'], true);
-} else {
-    echo "No session data set.<br>";
-}
+// if (isset($_SESSION['user'])) {
+//     echo "Session Data: " . print_r($_SESSION['user'], true);
+// } else {
+//     echo "No session data set.<br>";
+// }
 
 // Determine the selected form (login or signup)
 $formSelection = $_POST['form_selection'] ?? 'login'; // Default to 'login' if not set
@@ -40,7 +40,7 @@ $formSelection = $_POST['form_selection'] ?? 'login'; // Default to 'login' if n
             <h6>Account Type</h6>
             <select name="account_type" placeholder="User Name" required>
                     <option value="user">User</option>
-                    <option value="admin">Admin</option>
+                    <!-- <option value="admin">Admin</option> -->
                 </select>
                 <input type="text" name="username" placeholder="User Name" required>
                 <input type="email" name="email" placeholder="e.g., 202206169@stu.uob.edu.bh" required>

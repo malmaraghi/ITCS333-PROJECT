@@ -47,19 +47,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $accountType = htmlspecialchars(trim($_POST['account_type']));
 
         $userEmailPattern = '/^[0-9]{9}@stu\.uob\.edu\.bh$/';
-        $adminEmailPattern = '/^[0-9]{9}@uob\.edu\.bh$/';
+        // $adminEmailPattern = '/^[0-9]{9}@uob\.edu\.bh$/';
 
         if ($accountType === 'user' && !preg_match($userEmailPattern, $email)) {
             echo "User email must follow the format: 202206169@stu.uob.edu.bh";
-        } elseif ($accountType === 'admin' && !preg_match($adminEmailPattern, $email)) {
-            echo "Admin email must follow the format: 202206169@uob.edu.bh";
-        } else {
+        } 
+        // elseif ($accountType === 'admin' && !preg_match($adminEmailPattern, $email)) {
+        //     echo "Admin email must follow the format: 202206169@uob.edu.bh";
+        // } 
+        else {
             $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':email' => $email]);
 
             if ($stmt->rowCount() > 0) {
-                echo "User with this email already exists.";
+                header("Location: ERROR.php");
+
             } else {
                 $sql = "INSERT INTO users (username, email, password, account_type) VALUES (:username, :email, :password, :account_type)";
                 $stmt = $pdo->prepare($sql);
@@ -77,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'account_type' => $accountType
                 ];
 
-                header("Location: user_dashboard.php");
+                header("Location: ../Room browsing - Abdulla Saeed/index.php");
             }
         }
     }
