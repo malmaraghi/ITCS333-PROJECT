@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "room_booking"; // Replace with your database name
+$dbname = "room_booking";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -26,6 +26,11 @@ $availableRooms = $availableRoomsResult->fetch_assoc()['total'] ?? 0;
 $occupiedRoomsSql = "SELECT COUNT(*) AS total FROM rooms WHERE status = 'occupied'";
 $occupiedRoomsResult = $conn->query($occupiedRoomsSql);
 $occupiedRooms = $occupiedRoomsResult->fetch_assoc()['total'] ?? 0;
+
+// Fetch unavailable rooms count
+$unavailableRoomsSql = "SELECT COUNT(*) AS total FROM rooms WHERE status = 'unavailable'";
+$unavailableRoomsResult = $conn->query($unavailableRoomsSql);
+$unavailableRooms = $unavailableRoomsResult->fetch_assoc()['total'] ?? 0;
 
 // Fetch bookings with user and room details
 $sql = "SELECT b.booking_id, b.status AS booking_status, b.start_time, b.end_time,
@@ -58,7 +63,7 @@ $conn->close();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -79,7 +84,7 @@ $conn->close();
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-4 col-6">
+                        <div class="col-lg-3 col-md-6 col-12">
                             <div class="small-box bg-gradient-info">
                                 <div class="inner">
                                     <h3><?= $totalBookings ?></h3>
@@ -91,7 +96,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-6">
+                        <div class="col-lg-3 col-md-6 col-12">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3><?= $availableRooms ?></h3>
@@ -103,7 +108,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-6">
+                        <div class="col-lg-3 col-md-6 col-12">
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3><?= $occupiedRooms ?></h3>
@@ -114,9 +119,22 @@ $conn->close();
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3><?= $unavailableRooms ?></h3>
+                                    <p>Unavailable Rooms</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- Room Booking Table -->
             <section class="content">
