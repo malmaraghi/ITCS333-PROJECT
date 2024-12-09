@@ -5,7 +5,6 @@
 }
 
 
-/* General Styles */
 body, html {
     width: 100%;
     height: 100%;
@@ -13,11 +12,10 @@ body, html {
     font-family: Arial, sans-serif;
     color: white;
     text-align: center;
-    position: relative; /* Allow the ::before pseudo-element to cover the whole body */
-    overflow: scroll; /* Prevent any overflow from visible background */
+    position: relative; 
+    overflow: scroll; 
 }
 
-/* Motion Background */
 body::before {
     content: "";
     position: absolute;
@@ -97,9 +95,9 @@ body::before {
 
 /* SVG Styling */
 .center-svg svg {
-    width: 270px;  /* Adjust the size of the icon */
+    width: 270px;  
     height: 270px;
-    fill: white;  /* Adjust to any color */
+    fill: white;  
 }
 
 /* Right Side of the Intro Section */
@@ -108,7 +106,6 @@ body::before {
     max-width: 550px;
 }
 
-/* Text Styling */
 .intro h3 {
     font-size: 1.8rem;
     color: #ffffff;
@@ -121,17 +118,17 @@ body::before {
     line-height: 1.6;
     font-weight:400;
 }
-/* General Styling for Button Container */
+
 .button-container {
     display: flex;
-    justify-content: center; /* Center the buttons */
-    gap: 20px; /* Space between buttons */
+    justify-content: center; 
+    gap: 20px; 
     align-items: center;
     margin-top: -3rem;
 }
 
 
-/* Button Styling */
+
 .form-button {
     padding: 10px 20px;
     font-size: 16px;

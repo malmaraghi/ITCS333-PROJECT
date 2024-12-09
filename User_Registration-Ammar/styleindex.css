@@ -5,13 +5,13 @@
     box-sizing: border-box;
 }
 
-/* Body styling to center content */
+
 body {
-    display: flex; /* Flexbox for centering */
+    display: flex; 
     flex-direction: column;
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
-    height: 100vh; /* Full height of the viewport */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
     background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
     background-size: 400% 400%;
     animation: gradientMotion 8s ease infinite;
@@ -35,15 +35,14 @@ body {
 
 /* Form container styling */
 .form-container {
-    background-color: rgba(255, 255, 255, 0.1); /* Light translucent background */
+    background-color: rgba(255, 255, 255, 0.1); 
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    width: 300px; /* Set fixed width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin: 10px;
 }
 
-/* Form elements */
+
 .form-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -52,8 +51,8 @@ body {
 
 .form-container form {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    gap: 15px; /* Add space between elements */
+    flex-direction: column; 
+    gap: 15px; 
 }
 
 .form-container input,
