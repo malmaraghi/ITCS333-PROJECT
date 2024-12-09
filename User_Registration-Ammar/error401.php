@@ -47,7 +47,7 @@ body {
 </head>
 <body>
 
-<h2>[ERROR] User with this email already exists</h2>
+<h2>[ERROR:401] Invalid email or password</h2>
 
 </body>
 </html>

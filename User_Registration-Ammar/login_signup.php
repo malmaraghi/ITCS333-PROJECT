@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "Failed to set session.";
             }
         } else {
-            echo "Invalid email or password.";
+            header("Location: error401.php");
         }
     }
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([':email' => $email]);
 
             if ($stmt->rowCount() > 0) {
-                header("Location: ERROR.php");
+                header("Location: error409.php");
 
             } else {
                 $sql = "INSERT INTO users (username, email, password, account_type) VALUES (:username, :email, :password, :account_type)";
