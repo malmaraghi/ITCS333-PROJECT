@@ -94,7 +94,7 @@ $formSelection = $_POST['form_selection'] ?? 'login'; // Default to 'login' if n
             <input type="hidden" name="form_selection" value="login">
             <button type="submit" class="form-button">Login</button>
         </form>
-        <form method="POST">
+        <form method="POST" action="index.php">
             <input type="hidden" name="form_selection" value="signup">
             <button type="submit" class="form-button">Sign Up</button>
         </form>
