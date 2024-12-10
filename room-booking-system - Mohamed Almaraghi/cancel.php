@@ -9,13 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo->beginTransaction();
 
-        // Step 1: remove the booking from the 'bookings' table (delete the booking)
         $stmt = $pdo->prepare("DELETE FROM bookings WHERE booking_id = ?");
         $stmt->execute([$booking_id]);
-
-        // Step 2: update the room status to 'available' in the 'rooms' table
-        $updateRoomStatus = $pdo->prepare("UPDATE rooms SET status = 'available' WHERE room_id = ?");
-        $updateRoomStatus->execute([$room_id]);
 
         $pdo->commit();
 
