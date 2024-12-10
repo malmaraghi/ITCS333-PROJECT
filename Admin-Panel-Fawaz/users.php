@@ -36,13 +36,11 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-12">
                             <div class="alert alert-warning" role="alert">
                                 <h4 class="alert-heading">Page Currently Unavailable</h4>
                                 <p>We're sorry, but the Users page is currently unavailable. Please check back later.</p>
                                 <hr>
                             </div>
-                        </div>
                     </div>
                 </div>
             </section>
