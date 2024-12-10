@@ -12,6 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM bookings WHERE booking_id = ?");
         $stmt->execute([$booking_id]);
 
+        // update the room status to 'available' in the 'rooms' table
+        $updateRoomStatus = $pdo->prepare("UPDATE rooms SET status = 'Available' WHERE room_id = ?");
+        $updateRoomStatus->execute([$room_id]);
+        
         $pdo->commit();
 
         header("Location: ../Room browsing - Abdulla Saeed/index.php?status=cancel_success");
