@@ -22,7 +22,29 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
             display: flex;
             justify-content: space-between;
             font-family: Arial, sans-serif;
-        }
+            height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
+    background-size: 400% 400%;
+    animation: gradientMotion 8s ease infinite;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Keyframes for background motion effect */
+@keyframes gradientMotion {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+               
+        
 
         .filter-box {
             width: 250px;
