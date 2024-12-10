@@ -5,7 +5,7 @@ print_r($_SESSION);
 
 // Redirect to login if user is not logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: index.php");
+    header("Location: welcomepage.php");
     exit();
 }
 

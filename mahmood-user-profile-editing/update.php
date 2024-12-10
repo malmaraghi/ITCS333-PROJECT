@@ -52,53 +52,54 @@ if (isset($_GET['action']) && $_GET['action'] === 'uploadImage') {
 
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $Contact = trim($_POST['Contact']);
-    $phone = trim($_POST['phone']);
-    $comments = trim($_POST['comments']);
-    $photo = trim($_POST['photo']);
+    $fieldsToUpdate = [];
+    $params = [':id' => $user_id]; // Prepare params with user id
 
-    // Validate inputs
-    $errors = [];
-    if (empty($username)) $errors[] = "Username is required.";
-    if (!filter_var($Contact, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email.";
-    if (!preg_match('/^\d{8,10}$/', $phone)) $errors[] = "Phone must be 8-10 digits.";
+    // Add fields conditionally
+    if (isset($_POST['username']) && $_POST['username'] !== '') {
+        $fieldsToUpdate[] = "username = :username";
+        $params[':username'] = $_POST['username'];
+    }
 
-    if (empty($errors)) {
-        try {
-            // Prepare the SQL query for updating the profile
-            $stmt = $pdo->prepare("
-                UPDATE users 
-                SET username = :username, 
-                    Contact = :Contact, 
-                    phone_number = :phone, 
-                    comments = :comments, 
-                    picture = :photo 
-                WHERE id = :id
-            ");
-            $stmt->execute([
-                ':username' => $username,
-                ':Contact' => $Contact,
-                ':phone' => $phone,
-                ':comments' => $comments,
-                ':photo' => $photo,  // Save the image path
-                ':id' => $user_id,
-            ]);
+    if (isset($_POST['Major']) && $_POST['Major'] !== '') {
+        $fieldsToUpdate[] = "Major = :Major";
+        $params[':Major'] = $_POST['Major'];
+    }
 
-            // Check if the update was successful
-            if ($stmt->rowCount() > 0) {
-                echo "Updated successfully";
-                header("Location: ../user_dashboard.php");
-
-            } else {
-                echo "Something went wrong";
-                header("Location: ../user_dashboard.php");
-            }
-            
-        } catch (PDOException $e) {
-            echo "Database error: " . $e->getMessage();
+    // Validate phone number (only digits)
+    if (isset($_POST['phone']) && $_POST['phone'] !== '') {
+        $phone = $_POST['phone'];
+        
+        // Check if phone contains only digits
+        if (ctype_digit($phone)) {
+            $fieldsToUpdate[] = "phone_number = :phone_number";
+            $params[':phone_number'] = $phone;
+        } else {
+            echo "Error: Phone number must contain only digits.";
+            exit;
         }
-    } else {
-        echo "Errors:<br>" . implode("<br>", $errors);
+    }
+
+    if (isset($_POST['comments']) && $_POST['comments'] !== '') {
+        $fieldsToUpdate[] = "comments = :comments";
+        $params[':comments'] = $_POST['comments'];
+    }
+
+    if (isset($_POST['photo']) && $_POST['photo'] !== '') {
+        $fieldsToUpdate[] = "photo = :photo";
+        $params[':photo'] = $_POST['photo'];
+    }
+
+    if (!empty($fieldsToUpdate)) {
+        $sql = "UPDATE users SET " . implode(", ", $fieldsToUpdate) . " WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        
+        try {
+            $stmt->execute($params);
+            echo "Profile updated successfully.";
+        } catch (PDOException $e) {
+            echo "Error updating profile: " . $e->getMessage();
+        }
     }
 }
+?>

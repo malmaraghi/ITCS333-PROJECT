@@ -16,232 +16,134 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Browsing</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: space-between;
-            font-family: Arial, sans-serif;
-            height: 100vh; /* Full height of the viewport */
-    background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
-    background-size: 400% 400%;
-    animation: gradientMotion 8s ease infinite;
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-}
-
-/* Keyframes for background motion effect */
-@keyframes gradientMotion {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-               
-        
-
-        .filter-box {
-            width: 250px;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            position: fixed;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .content {
-            flex-grow: 1;
-            margin-right: 270px; /* Adjust to ensure space for filter box */
-            padding: 20px;
-        }
-
-        .header {
-            margin-bottom: 20px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .room-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .status-available {
-            background-color: #d4edda;
-        }
-
-        .status-occupied {
-            background-color: #fff3cd;
-        }
-
-        .status-unavailable {
-            background-color: #f8d7da;
-        }
-
-        .room-status {
-            font-weight: bold;
-        }
-
-        .filter-box select {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 5px;
-        }
-
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style1.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const rooms = <?php echo json_encode($rooms); ?>;
-            const roomType = '<?php echo $roomType; ?>';
-            const gridContainer = document.querySelector('.grid-container');
-            const departmentFilter = document.getElementById('department');
-            const floorFilter = document.getElementById('floor');
-            const modal = document.getElementById('myModal');
-            const modalContent = document.querySelector('.modal-content');
-            const span = document.querySelector('.close');
+ document.addEventListener('DOMContentLoaded', function () {
+    const rooms = <?php echo json_encode($rooms); ?>; // Rooms data from PHP
+    const gridContainer = document.querySelector('.grid-container');
+    const modal = document.getElementById('myModal');
+    const modalContent = document.querySelector('.modal-content');
+    const span = document.querySelector('.close');
+    const filterButtons = document.querySelectorAll('.filter-option');
 
-            function filterRooms() {
-                const selectedDepartment = departmentFilter.value;
-                const selectedFloor = floorFilter.value;
+    // Default filter selection (set as active when page loads)
+    const defaultFloor = ''; // Default floor (can be modified as needed)
+    const defaultDepartment = ''; // Default department (can be modified as needed)
 
-                const filteredRooms = rooms.filter(room => 
-                    (roomType === '' || room.room_type === roomType) &&
-                    (selectedDepartment === '' || room.room_department === selectedDepartment) &&
-                    (selectedFloor === '' || room.room_floor == selectedFloor)
-                );
+    // Set default active filters
+    const defaultFloorButton = document.querySelector(`.filter-option[data-type="floor"][data-value="${defaultFloor}"]`);
+    const defaultDepartmentButton = document.querySelector(`.filter-option[data-type="department"][data-value="${defaultDepartment}"]`);
 
-                displayRooms(filteredRooms);
-            }
+    if (defaultFloorButton) defaultFloorButton.classList.add('active');
+    if (defaultDepartmentButton) defaultDepartmentButton.classList.add('active');
 
-            function displayRooms(filteredRooms) {
-                gridContainer.innerHTML = '';
+    // Function to display rooms in the grid
+    function displayRooms(roomsToDisplay) {
+        gridContainer.innerHTML = ''; // Clear existing content
 
-                filteredRooms.forEach(room => {
-                    const roomCard = document.createElement('div');
-                    roomCard.className = `room-card status-${room.status.toLowerCase()}`;
-                    roomCard.innerHTML = `
-                        <h2>${room.room_name}</h2>
-                        <p><strong>Department:</strong> ${room.room_department}</p>
-                        <p class="room_type"><strong>Room type:</strong> ${room.room_type}</p>
-                        <p><strong>Floor:</strong> ${room.room_floor}</p>
-                        <p class="room-status"><strong>Status:</strong> ${room.status}</p>
-                    `;
-                    roomCard.addEventListener('click', () => showRoomDetails(room));
-                    gridContainer.appendChild(roomCard);
-                });
-            }
+        roomsToDisplay.forEach(room => {
+            const roomCard = document.createElement('div');
+            roomCard.className = `room-card status-${room.status.toLowerCase()}`;
+            roomCard.innerHTML = `
+                <h2>${room.room_name}</h2>
+                <p><strong>Department:</strong> ${room.room_department}</p>
+                <p><strong>Floor:</strong> ${room.room_floor}</p>
+                <p class="room-status"><strong>Status:</strong> ${room.status}</p>
+            `;
+            roomCard.addEventListener('click', () => showRoomDetails(room)); // Attach click handler
+            gridContainer.appendChild(roomCard);
+        });
+    }
 
-            function showRoomDetails(room) {
-                    modalContent.innerHTML = `
-                        <span class="close">&times;</span>
-                        <h2>${room.room_name}</h2>
-                        <p><strong>Department:</strong> ${room.room_department}</p>
-                        <p><strong>Room Type:</strong> ${room.room_type}</p>
-                        <p><strong>Floor:</strong> ${room.room_floor}</p>
-                        <p><strong>Status:</strong> ${room.status}</p>
-                        <form action="../room-booking-system - Mohamed Almaraghi/book.php" method="POST">
-                            <input type="hidden" name="room_id" value="${room.room_id}">
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
-                            <input type="hidden" name="start_date" value="${<?php echo json_encode($startDate); ?>}">
-                            <input type="hidden" name="end_date" value="${<?php echo json_encode($endDate); ?>}">
-                            <button type="submit">Book Now</button>
-                        </form>
-                    `;
+    // Function to show room details in the modal
+    function showRoomDetails(room) {
+        modalContent.innerHTML = `
+            <span class="close">&times;</span>
+            <h2>${room.room_name}</h2>
+            <p><strong>Department:</strong> ${room.room_department}</p>
+            <p><strong>Room Type:</strong> ${room.room_type}</p>
+            <p><strong>Floor:</strong> ${room.room_floor}</p>
+            <p><strong>Status:</strong> ${room.status}</p>
+            <form action="../room-booking-system - Mohamed Almaraghi/book.php" method="POST">
+                <input type="hidden" name="room_id" value="${room.room_id}">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
+                <input type="hidden" name="start_date" value="<?php echo $startDate; ?>">
+                <input type="hidden" name="end_date" value="<?php echo $endDate; ?>">
+                <button type="submit">Book Now</button>
+            </form>
+        `;
+        modal.style.display = 'block'; // Show the modal
+    }
 
-                modal.style.display = "block";
-            }
+    // Close modal when the close button is clicked
+    span.onclick = function () {
+        modal.style.display = 'none';
+    };
 
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
+    // Close modal when clicking outside the modal content
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
 
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
+    // Filter logic
+    function filterRooms() {
+        const selectedDepartment = document.querySelector('.filter-option[data-type="department"].active')?.dataset.value || '';
+        const selectedFloor = document.querySelector('.filter-option[data-type="floor"].active')?.dataset.value || '';
 
-            departmentFilter.addEventListener('change', filterRooms);
-            floorFilter.addEventListener('change', filterRooms);
+        const filteredRooms = rooms.filter(room => 
+            (selectedDepartment === '' || room.room_department === selectedDepartment) &&
+            (selectedFloor === '' || room.room_floor == selectedFloor)
+        );
 
-            departmentFilter.value = 'ITCS';
-            floorFilter.value = '1';
+        displayRooms(filteredRooms);
+    }
+
+    // Add click event listeners to filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Toggle active class for the current button
+            const type = this.dataset.type;
+            const buttonsOfSameType = document.querySelectorAll(`.filter-option[data-type="${type}"]`);
+            buttonsOfSameType.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
             filterRooms();
         });
+    });
+
+    // Initial display of rooms
+    displayRooms(rooms); // Display all rooms by default
+});
+
+
     </script>
 </head>
 <body>
-    <div class="filter-box">
-        <h3>Filter Rooms</h3>
-        <label for="floor">Floor:</label>
-        <select name="floor" id="floor">
-            <option value="">All Floors</option>
-            <option value="1">1st Floor</option>
-            <option value="2">2nd Floor</option>
-            <option value="3">3rd Floor</option>
-        </select>
-        <br><br>
-
-        <label for="department">Department:</label>
-        <select name="department" id="department">
-            <option value="">All Departments</option>
-            <option value="ITCS">ITCS</option>
-            <option value="ITCE">ITCE</option>
-            <option value="ITIS">ITIS</option>
-        </select>
-        <br><br>
+<div class="filter-box">
+    <h3>Filter Rooms</h3>
+    
+    <label>Floor:</label>
+    <div class="filter-group">
+        <button class="filter-option" data-type="floor" data-value="">All Floors</button>
+        <button class="filter-option" data-type="floor" data-value="1">1st Floor</button>
+        <button class="filter-option" data-type="floor" data-value="2">2nd Floor</button>
+        <button class="filter-option" data-type="floor" data-value="3">3rd Floor</button>
     </div>
+    <br><br>
+    
+    <label>Department:</label>
+    <div class="filter-group">
+        <button class="filter-option" data-type="department" data-value="">All Departments</button>
+        <button class="filter-option" data-type="department" data-value="ITCS">ITCS</button>
+        <button class="filter-option" data-type="department" data-value="ITCE">ITCE</button>
+        <button class="filter-option" data-type="department" data-value="ITIS">ITIS</button>
+    </div>
+</div>
+
+
     
     <div class="content">
         <h1 class="header">Room Browsing</h1>

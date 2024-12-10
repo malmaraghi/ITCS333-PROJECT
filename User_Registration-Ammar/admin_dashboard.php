@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['account_type'] !== 'admin') {
-    header("Location: index.php");
+    header("Location: welcomepage.php");
     exit();
 }
 echo "Welcome, " . $_SESSION['user']['username'] . "! This is the Admin Dashboard.";

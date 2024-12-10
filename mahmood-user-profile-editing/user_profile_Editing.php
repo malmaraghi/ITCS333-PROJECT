@@ -45,7 +45,7 @@
                     <input type="hidden" id="uploadedFilePath" name="photo">
 
                     <button type="button" class="save-btn" onclick="submitForm()">Save</button>
-                    <button type="reset" class="cancel-btn">Cancel</button>
+                    <button type="reset" class="cancel-btn" onclick="cancelForm()">Cancel</button>
                 </form>
             </div>
         </header>
@@ -122,6 +122,11 @@
                 console.error('Error:', error);
                 alert('An error occurred while updating the profile.');
             });
+        }
+
+        function cancelForm() {
+            // Redirect to the desired page when the cancel button is clicked
+            window.location.href = '../Room browsing - Abdulla Saeed/index.php';  // Replace with the desired URL
         }
     </script>
 </body>
