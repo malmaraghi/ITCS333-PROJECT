@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    padding: 20px;
+    /* display: flex;  */
+    justify-content: center;
+    height: 100vh;
+    background: #f9f9f9;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar Styles */
+nav {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+nav a {
+    color: #cce7ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+nav a.active {
+    color: #fff;
+    background: #0056b3;
+}
+
+nav a:hover {
+    color: #fff;
+    background: #007bff;
+}
+
+.container {
+    max-width: 1200px; 
+    width: 100%;
+    margin: auto;
+}
+
+/* Table and Content Section */
+.table-section, .chart-section {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-section {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+}
+
+.chart-section {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f0f9ff, #cce7ff);
+    text-align: center;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.content-header h1 {
+    color: #007bff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+    width: 100%;
+    border-bottom: 3px solid #007bff;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+}
+
+table td {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.room-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.room-list th,
+.room-list td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.room-list th {
+    background-color: #007bff;
+    color: white;
+}
+
+.content2 .container-fluid2 {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-edit {
+    background-color: #FF9800;
+}
+
+.btn-delete {
+    background-color: #F44336;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-sizing: border-box; 
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Inputs */
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+/* Form Submit Button */
+form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+ /* Add space between form fields in the modal */
+ #roomForm input {
+    margin-bottom: 10px; 
+}
+
+/* Specifically for certain fields */
+#room_department,
+#room_floor,
+#status {
+    margin-bottom: 15px; 
+}

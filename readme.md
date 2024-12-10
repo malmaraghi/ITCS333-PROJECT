@@ -4,22 +4,23 @@ Welcome to our ITCS333 Project Repository. This repository contains the work and
 
 ## Project Overview
 
-This repository will serve as the central hub for managing our ITCS333 project. We will use this space to:
+This repository serves as the central hub for managing our ITCS333 project, which focuses on developing a responsive web-based room booking system for the IT College. The system will incorporate various features to enhance both the user experience and administrative capabilities, including room browsing, booking management, user profiles, and an admin panel.
 
-- Track our project development
-- Manage code versions through GitHub
-- Collaborate on project tasks and updates
-- Share documentation and progress
+Key objectives of the project include:
+
+- Enabling students and faculty to easily browse and book available rooms.
+- Providing an intuitive user interface for managing bookings and user profiles.
+- Giving administrators the ability to manage the system efficiently, with features like room management and user administration.
 
 ## Group Members
 
 | #  | Name                      | Student ID | Section | Task                         |
 |----|---------------------------|------------|---------|------------------------------|
-| 1  | Mohamed Adnan Almaraghi    | 202101655  | Sec 09  | Booking System               |
-| 2  | Mahmood Raed Alsayyed      | 202209657  | Sec 01  | User Profile Management      |
-| 3  | Abdulla Saeed Alkhanaizi   | 202208891  | Sec 01  | Room Browsing and Details    |
-| 4  | Fawaz Adel Almeer          | 202011989  | Sec 01  | Admin Panel                  |
-| 5  | Ammar Ali Alasfoor         | 202203136  | Sec 01  | User Registration and Login  |
+| 1  | Mohamed Adnan Almaraghi    | 202101655  | 09      | Booking System               |
+| 2  | Mahmood Raed Alsayyed      | 202209657  | 01      | User Profile Management      |
+| 3  | Abdulla Saeed Alkhanaizi   | 202208891  | 01      | Room Browsing and Details    |
+| 4  | Fawaz Adel Almeer          | 202011989  | 01      | Admin Panel                  |
+| 5  | Ammar Ali Alasfoor         | 202203136  | 01      | User Registration and Login  |
 
 ## GitHub Repository
 

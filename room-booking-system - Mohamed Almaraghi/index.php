@@ -1,5 +1,7 @@
+// This part is not used anymore and is implemented in Abdulla's index.php file
+
 <?php
-include('../config.php'); 
+include('config.php'); 
 
 if (isset($_GET['status'])) {
     $messages = [
@@ -25,7 +27,7 @@ if (isset($_GET['status'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Booking System</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>

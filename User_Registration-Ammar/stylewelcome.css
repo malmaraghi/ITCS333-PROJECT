@@ -1,0 +1,338 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body, html {
+    width: 100%;
+    height: 100%;
+    
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    position: relative; 
+    overflow: scroll; 
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
+    background-size: 400% 400%;
+    animation: gradientMotion 8s ease infinite;
+    z-index: -1;
+}
+
+
+/* Keyframes for Background Motion Effect */
+@keyframes gradientMotion {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.containerOfIntro{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Intro Section Layout */
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 70%;
+    max-width: 1000px;
+    border-radius: 15px;
+    padding: 30px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Fade-in animation for intro */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Left Side of the Intro Section */
+.center-svg {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: svgMotion 4s ease-in-out infinite;
+}
+
+/* Smooth Motion Animation for SVG */
+@keyframes svgMotion {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.1) translateY(-15px);
+    }
+}
+
+/* SVG Styling */
+.center-svg svg {
+    width: 270px;  
+    height: 270px;
+    fill: white;  
+}
+
+/* Right Side of the Intro Section */
+.intro-text {
+    margin-left: 20px;
+    max-width: 550px;
+}
+
+.intro h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.intro p {
+    font-size: 1rem;
+    color: #ffffff;
+    line-height: 1.6;
+    font-weight:400;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+    align-items: center;
+    margin-top: -3rem;
+}
+
+
+
+.form-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c63ff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #5340b1;
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .containerOfIntro{
+        flex-direction: column;
+        align-items: center;
+      }
+    .intro {
+        flex-direction: column;
+        text-align: center;
+        width: 90%;
+        
+    }
+    
+    .center-svg {
+        width: 100%;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+
+    }
+    .center-svg svg {
+        width: 180px;  /* Adjust the size of the icon */
+        height: 180px;
+        fill: white;  /* Adjust to any color */
+    }
+ 
+    .intro-text {
+        margin-left: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .intro h3 {
+        font-size: 1.5rem;
+    }
+
+    .intro p {
+        font-size: 0.9rem;
+    }
+    .form-button {
+        padding: 10px 15px;
+        font-size: 12px;
+       
+    }
+
+    
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+    .intro h3 {
+        font-size: 1.2rem;
+    }
+
+    .intro p {
+        font-size: 0.8rem;
+    }
+    .center-svg {
+        width: 100%;
+        margin-bottom:2rem;
+        margin-top: 2rem ;
+
+    }
+
+    .center-svg svg {
+        width: 100px;
+        height: 100px;
+    }
+
+    @keyframes svgMotion {
+        0%, 100% {
+            transform: scale(1) translateY(0);
+        }
+        50% {
+            transform: scale(1.1) translateY(-8px);
+        }
+    }
+
+    .button-container {
+        
+        margin-top: -1rem;
+    }
+
+
+    .form-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .form-button {
+        padding: 10px 15px;
+        font-size: 12px;
+       
+    }
+}
+
+/* Extra Large Screens (1440px and above) */
+@media (min-width: 1440px) {
+    .intro {
+        width: 60%;
+    }
+
+    .center-svg svg {
+        width: 300px;
+        height: 300px;
+    }
+
+    .intro h3 {
+        font-size: 2.5rem;
+    }
+
+    .intro p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro h3 {
+        font-size: 1.2rem;
+    }
+
+    .intro p {
+        font-size: 0.8rem;
+    }
+
+    .center-svg svg {
+        width: 200px;
+        height: 200px;
+    }
+
+    .form-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+
+@media (min-width: 1440px) {
+    .intro {
+        width: 60%;
+    }
+
+    .center-svg svg {
+        width: 300px;
+        height: 300px;
+    }
+
+    .intro h3 {
+        font-size: 2.5rem;
+    }
+
+    .intro p {
+        font-size: 1.2rem;
+    }
+}

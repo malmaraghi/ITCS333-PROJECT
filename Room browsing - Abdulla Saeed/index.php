@@ -10,7 +10,8 @@ if (isset($_GET['status'])) {
         'duration_exceeded' => "Bookings cannot exceed 2 hours.",
         'invalid_time_order' => "End time must be later than start time.",
         'error' => "An error occurred. Please try again.",
-        'invalid' => "Invalid request method."
+        'invalid' => "Invalid request method.",
+        'unavailable_room' => "The room is either Unavailable or Occupied"
     ];
 
     if (isset($messages[$_GET['status']])) {
@@ -27,16 +28,32 @@ if (isset($_GET['status'])) {
     <title>Room Booking System</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var startTimeInput = document.getElementById('start_time');
-            var endTimeInput = document.getElementById('end_time');
+     document.addEventListener('DOMContentLoaded', function () {
+    // Get the inputs
+    var startTimeInput = document.getElementById('startTime');
+    var endTimeInput = document.getElementById('endTime');
 
-            startTimeInput.addEventListener('change', function () {
-                var startTime = new Date(startTimeInput.value);
-                var endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // Add 1 hour
-                endTimeInput.value = endTime.toISOString().slice(0, 16);
-            });
-        });
+    // Add event listener to the Start Date
+    startTimeInput.addEventListener('input', function () {
+        var startTime = new Date(startTimeInput.value); // Parse the Start Date
+
+        // Check if the Start Date is valid
+        if (!isNaN(startTime.getTime())) {
+            // Add 1 hour to the Start Date
+            var endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
+
+            // Format the date for the End Date input (datetime-local requires yyyy-MM-ddTHH:mm)
+            var formattedEndTime = endTime.toISOString().slice(0, 16);
+
+            // Set the value of the End Date input
+            endTimeInput.value = formattedEndTime;
+        } else {
+            console.error("Invalid Start Date format");
+        }
+    });
+});
+
+
     </script>
 </head>
 <body>
@@ -52,16 +69,14 @@ if (isset($_GET['status'])) {
         </select>
         <br><br>
 
-        <label for="start_time">Start Time:</label>
-        <input type="datetime-local" name="start_time" id="start_time" required>
-        <br><br>
-
-        <label for="end_time">End Time:</label>
-        <input type="datetime-local" name="end_time" id="end_time" required>
-        <br><br>
-
+        <label for="start_date">Start Date:</label>
+        <input type="datetime-local" id="start_date" name="start_date" required>
+        
+        <label for="end_date">End Date:</label>
+        <input type="datetime-local" id="end_date" name="end_date" required>
+        
         <button type="submit">Browse Rooms</button>
-    </form>
+        </form>
 
     <h2>Your Bookings</h2>
     <div class="bookings-container">
@@ -75,30 +90,39 @@ if (isset($_GET['status'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $user_id = 3; // temporary user ID
-                $stmt = $pdo->prepare("
-                    SELECT bookings.booking_id, rooms.room_name, bookings.start_time, bookings.end_time 
-                    FROM bookings
-                    JOIN rooms ON bookings.room_id = rooms.room_id
-                    WHERE bookings.user_id = ?
-                ");
-                $stmt->execute([$user_id]);
-                while ($booking = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "
-                    <tr>
-                        <td>{$booking['room_name']}</td>
-                        <td>{$booking['start_time']}</td>
-                        <td>{$booking['end_time']}</td>
-                        <td>
-                            <form action='cancel.php' method='POST'>
-                                <input type='hidden' name='booking_id' value='{$booking['booking_id']}'>
-                                <button type='submit' class='cancel-button'>Cancel</button>
-                            </form>
-                        </td>
-                    </tr>";
-                }
-                ?>
+            <?php
+                    session_start();
+                    require_once 'db.php';
+
+                    if (!isset($_SESSION['user'])) {
+                        header("Location: ../User_Registration-Ammar/login.php"); 
+                        exit();
+                    }
+                    $user_id = $_SESSION['user']['id'];
+                    $stmt = $pdo->prepare("
+                        SELECT bookings.booking_id, rooms.room_name, bookings.start_time, bookings.end_time 
+                        FROM bookings
+                        JOIN rooms ON bookings.room_id = rooms.room_id
+                        WHERE bookings.user_id = ?
+                    ");
+                    $stmt->execute([$user_id]);
+
+                    while ($booking = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "
+                        <tr>
+                            <td>{$booking['room_name']}</td>
+                            <td>{$booking['start_time']}</td>
+                            <td>{$booking['end_time']}</td>
+                            <td>
+                                <form action='../room-booking-system - Mohamed Almaraghi/cancel.php' method='POST'>
+                                    <input type='hidden' name='booking_id' value='{$booking['booking_id']}'>
+                                    <button type='submit' class='cancel-button'>Cancel</button>
+                                </form>
+                            </td>
+                        </tr>";
+                    }
+                    ?>
+
             </tbody>
         </table>
     </div>
