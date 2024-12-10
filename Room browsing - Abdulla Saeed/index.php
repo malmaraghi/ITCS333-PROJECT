@@ -100,7 +100,7 @@ if (isset($_GET['status'])) {
                     }
                     $user_id = $_SESSION['user']['id'];
                     $stmt = $pdo->prepare("
-                        SELECT bookings.booking_id, rooms.room_name, bookings.start_time, bookings.end_time 
+                        SELECT bookings.booking_id, bookings.room_id, rooms.room_name, bookings.start_time, bookings.end_time 
                         FROM bookings
                         JOIN rooms ON bookings.room_id = rooms.room_id
                         WHERE bookings.user_id = ?
@@ -116,6 +116,7 @@ if (isset($_GET['status'])) {
                             <td>
                                 <form action='../room-booking-system - Mohamed Almaraghi/cancel.php' method='POST'>
                                     <input type='hidden' name='booking_id' value='{$booking['booking_id']}'>
+                                    <input type='hidden' name='room_id' value='{$booking['room_id']}'>
                                     <button type='submit' class='cancel-button'>Cancel</button>
                                 </form>
                             </td>
