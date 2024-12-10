@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $room = $stmt->fetch();
 
         if ($room['status'] !== 'Available') {
-            header("Location: ../Room browsing - Abdulla Saeed/index.php?status=unavailable_occupied_room");
+            header("Location: ../Room browsing - Abdulla Saeed/index.php?status=unavailable_room");
             exit();
         }
 
