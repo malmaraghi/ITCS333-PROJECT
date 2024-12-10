@@ -40,10 +40,12 @@ $sql = "SELECT b.booking_id, b.status AS booking_status, b.start_time, b.end_tim
         INNER JOIN rooms r ON b.room_id = r.room_id";
 $result = $conn->query($sql);
 
-// Fetch data for pie chart
-$pieChartSql = "SELECT room_department, COUNT(*) AS count
-                FROM rooms
-                GROUP BY room_department";
+// Fetch data for pie chart based on booked rooms
+$pieChartSql = "SELECT r.room_department, COUNT(*) AS count
+                FROM bookings b
+                INNER JOIN rooms r ON b.room_id = r.room_id
+                WHERE b.status = 'booked'
+                GROUP BY r.room_department";
 $pieChartResult = $conn->query($pieChartSql);
 $chartData = [];
 while ($row = $pieChartResult->fetch_assoc()) {
@@ -51,6 +53,9 @@ while ($row = $pieChartResult->fetch_assoc()) {
 }
 
 $conn->close();
+
+// Current page
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +71,19 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body >
     <div class="wrapper">
-        <div class="content-wrapper">
+         <!-- Navigation Bar -->
+         <nav>
+            <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : ''; ?>">Dashboard</a>
+            <a href="room_management.php" class="<?= $currentPage == 'room_management.php' ? 'active' : ''; ?>">Room Management</a>
+            <a href="users.php" class="<?= $currentPage == 'users.php' ? 'active' : ''; ?>">Users</a>
+        </nav>
+        <!-- <div class="content-wrapper"> -->
             <!-- Content Header -->
             <section class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
                             <h1>Admin Dashboard</h1>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -148,9 +155,9 @@ $conn->close();
                                 <th>Booked By</th>
                                 <th>Department</th>
                                 <th>Type</th>
-                                <th>Status</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,9 +171,9 @@ $conn->close();
                                         </td>
                                         <td><?= htmlspecialchars($row['room_department']) ?></td>
                                         <td><?= htmlspecialchars($row['room_type']) ?></td>
-                                        <td><?= htmlspecialchars($row['booking_status']) ?></td>
                                         <td><?= htmlspecialchars($row['start_time']) ?></td>
                                         <td><?= htmlspecialchars($row['end_time']) ?></td>
+                                        <td><?= htmlspecialchars($row['booking_status']) ?></td>
                                     </tr>
                                 <?php endwhile;
                             else: ?>
