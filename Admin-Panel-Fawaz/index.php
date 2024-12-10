@@ -40,18 +40,6 @@ $sql = "SELECT b.booking_id, b.status AS booking_status, b.start_time, b.end_tim
         INNER JOIN rooms r ON b.room_id = r.room_id";
 $result = $conn->query($sql);
 
-// Fetch data for pie chart based on booked rooms
-$pieChartSql = "SELECT r.room_department, COUNT(*) AS count
-                FROM bookings b
-                INNER JOIN rooms r ON b.room_id = r.room_id
-                WHERE b.status = 'booked'
-                GROUP BY r.room_department";
-$pieChartResult = $conn->query($pieChartSql);
-$chartData = [];
-while ($row = $pieChartResult->fetch_assoc()) {
-    $chartData[] = ['department' => $row['room_department'], 'count' => $row['count']];
-}
-
 $conn->close();
 
 // Current page
@@ -71,152 +59,151 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body >
+<body>
     <div class="wrapper">
-         <!-- Navigation Bar -->
-         <nav>
+        <!-- Navigation Bar -->
+        <nav>
             <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : ''; ?>">Dashboard</a>
-            <a href="room_management.php" class="<?= $currentPage == 'room_management.php' ? 'active' : ''; ?>">Room Management</a>
+            <a href="room_management.php" class="<?= $currentPage == 'room_management.php' ? 'active' : ''; ?>">Room
+                Management</a>
             <a href="users.php" class="<?= $currentPage == 'users.php' ? 'active' : ''; ?>">Users</a>
         </nav>
         <!-- <div class="content-wrapper"> -->
-            <!-- Content Header -->
-            <section class="content-header">
-                <div class="container-fluid">
-                            <h1>Admin Dashboard</h1>
-                </div>
-            </section>
+        <!-- Content Header -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <h1>Admin Dashboard</h1>
+            </div>
+        </section>
 
-            <!-- Dashboard Stats -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="small-box bg-gradient-info">
-                                <div class="inner">
-                                    <h3><?= $totalBookings ?></h3>
-                                    <p>Total Bookings</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-calendar-check"></i>
-                                </div>
+        <!-- Dashboard Stats -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="small-box bg-gradient-info">
+                            <div class="inner">
+                                <h3><?= $totalBookings ?></h3>
+                                <p>Total Bookings</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-calendar-check"></i>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3><?= $availableRooms ?></h3>
-                                    <p>Available Rooms</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-door-open"></i>
-                                </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3><?= $availableRooms ?></h3>
+                                <p>Available Rooms</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-door-open"></i>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3><?= $occupiedRooms ?></h3>
-                                    <p>Occupied Rooms</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-door-closed"></i>
-                                </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3><?= $occupiedRooms ?></h3>
+                                <p>Occupied Rooms</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-door-closed"></i>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <h3><?= $unavailableRooms ?></h3>
-                                    <p>Unavailable Rooms</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-ban"></i>
-                                </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3><?= $unavailableRooms ?></h3>
+                                <p>Unavailable Rooms</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-ban"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
 
-            <!-- Room Booking Table -->
-            <section class="content">
-                <div class="container-fluid table-section">
-                    <h2>Room Bookings</h2>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Booking ID</th>
-                                <th>Room Name</th>
-                                <th>Booked By</th>
-                                <th>Department</th>
-                                <th>Type</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if ($result && $result->num_rows > 0):
-                                while ($row = $result->fetch_assoc()): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($row['booking_id']) ?></td>
-                                        <td><?= htmlspecialchars($row['room_name']) ?></td>
-                                        <td><?= htmlspecialchars($row['username']) ?> (<?= htmlspecialchars($row['email']) ?>)
-                                        </td>
-                                        <td><?= htmlspecialchars($row['room_department']) ?></td>
-                                        <td><?= htmlspecialchars($row['room_type']) ?></td>
-                                        <td><?= htmlspecialchars($row['start_time']) ?></td>
-                                        <td><?= htmlspecialchars($row['end_time']) ?></td>
-                                        <td><?= htmlspecialchars($row['booking_status']) ?></td>
-                                    </tr>
-                                <?php endwhile;
-                            else: ?>
+        <!-- Room Booking Table -->
+        <section class="content">
+            <div class="container-fluid table-section">
+                <h2>Room Bookings</h2>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Room Name</th>
+                            <th>Booked By</th>
+                            <th>Department</th>
+                            <th>Type</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result && $result->num_rows > 0):
+                            while ($row = $result->fetch_assoc()): ?>
                                 <tr>
-                                    <td colspan="8">No bookings available</td>
+                                    <td><?= htmlspecialchars($row['booking_id']) ?></td>
+                                    <td><?= htmlspecialchars($row['room_name']) ?></td>
+                                    <td><?= htmlspecialchars($row['username']) ?> (<?= htmlspecialchars($row['email']) ?>)
+                                    </td>
+                                    <td><?= htmlspecialchars($row['room_department']) ?></td>
+                                    <td><?= htmlspecialchars($row['room_type']) ?></td>
+                                    <td><?= htmlspecialchars($row['start_time']) ?></td>
+                                    <td><?= htmlspecialchars($row['end_time']) ?></td>
+                                    <td><?= htmlspecialchars($row['booking_status']) ?></td>
                                 </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                            <?php endwhile;
+                        else: ?>
+                            <tr>
+                                <td colspan="8">No bookings available</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        </section>
 
-            <!-- Pie Chart -->
-            <section class="content">
-                <div class="container-fluid chart-section">
-                    <h2>Room Usage by Department</h2>
-                    <div style="width: 400px; height: 400px; margin: auto;">
-                        <canvas id="pieChart"></canvas>
-                    </div>
+        <!-- Rooms by Department -->
+        <section class="content">
+            <div class="container-fluid">
+                <h2>Rooms by Department</h2>
+                <div class="row">
+                    <?php foreach (['ITIS', 'ITCS', 'ITCE'] as $department): ?>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div
+                                class="small-box <?= $department == 'ITIS' ? 'bg-info' : ($department == 'ITCS' ? 'bg-success' : 'bg-warning') ?>">
+                                <div class="inner">
+                                    <h3><?= $departmentRooms[$department]['total_rooms'] ?? 0 ?></h3>
+                                    <p>Total Rooms in <?= $department ?></p>
+                                    <p>Booked: <?= $departmentRooms[$department]['booked_rooms'] ?? 0 ?></p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </section>
-
-        </div>
+            </div>
+        </section>
+    </div>
     </div>
 
-    <!-- Chart.js Integration -->
     <script>
-        const chartData = <?= json_encode($chartData) ?>;
-        const labels = chartData.map(data => data.department);
-        const values = chartData.map(data => data.count);
 
-        const ctx = document.getElementById('pieChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Room Usage',
-                    data: values,
-                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8']
-                }]
-            }
-        });
     </script>
 </body>
 

@@ -33,18 +33,52 @@
             </section>
 
             <!-- Users Page Unavailable Message -->
-            <section class="content">
+             <!-- Room List Table -->
+             <section class="content table-section">
                 <div class="container-fluid">
-                    <div class="row">
-                            <div class="alert alert-warning" role="alert">
-                                <h4 class="alert-heading">Page Currently Unavailable</h4>
-                                <p>We're sorry, but the Users page is currently unavailable. Please check back later.</p>
-                                <hr>
-                            </div>
-                    </div>
+                    <table class="room-list">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Account Type</th>
+                                <th>Account Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Connection to the database
+                            $conn = new mysqli('localhost', 'root', '', 'room_booking');
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            // Fetch rooms data
+                            $sql = "SELECT * FROM users";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['id'] . "</td>";
+                                    echo "<td>" . $row['username'] . "</td>";
+                                    echo "<td>" . $row['email'] . "</td>";
+                                    echo "<td>" . $row['phone_number'] . "</td>";
+                                    echo "<td>" . $row['account_type'] . "</td>";
+                                    echo "<td>
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='9'>No Users Available</td></tr>";
+                            }
+                            $conn->close();
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </section>
-
         </div>
     </div>
 
