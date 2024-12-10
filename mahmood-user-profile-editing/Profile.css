@@ -1,0 +1,286 @@
+/* General Reset */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, #181365, #3a2f8a, #181365, #0f0e3d);
+    background-size: 400% 400%;
+    animation: gradientMotion 8s ease infinite;
+    color: white;
+    text-align: center;
+}
+
+/* Keyframes for Background Motion */
+@keyframes gradientMotion {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Profile Container */
+.profile-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #d4d4dc;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Styling */
+header {
+    background-color: rgba(58, 47, 138, 0.9);
+    min-height: 200px;
+    display: flex;
+    padding: 25px;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Profile Image Styling */
+.profil-image img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: 6px solid #6c63ff;
+    transition: transform 0.3s ease;
+}
+
+.profil-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Buttons */
+.edit-photo-btn,
+.save-btn,
+.cancel-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #3a2f8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-photo-btn:hover,
+.save-btn:hover,
+.cancel-btn:hover {
+    background-color: #5340b1;
+    transform: scale(1.05);
+}
+
+/* Profile Details */
+.profile-details {
+    padding: 30px;
+    width: 70%;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Info Form */
+.profile-info-form label {
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+.profile-info-form input,
+.profile-info-form textarea {
+    padding: 14px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #333333;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: border 0.3s ease;
+}
+
+.profile-info-form input:focus,
+.profile-info-form textarea:focus {
+    border-color: #6c63ff;
+    outline: none;
+    background-color: #f4f4f4;
+}
+
+.profile-info-form input::placeholder,
+.profile-info-form textarea::placeholder {
+    color: #aaa;
+}
+
+/* UOB References Section */
+.container-2 {
+    background-color: rgba(255, 255, 255, 0.1);
+    min-height: 150px;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Reference Title */
+.Reference {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* UOB Links */
+.UOB-References ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.UOB-References li {
+    margin: 8px 0;
+}
+
+.UOB-References a {
+    color: #6c63ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.UOB-References a:hover {
+    color: #E6E6FA;
+    transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+    background-color: rgba(16, 12, 84, 0.9);
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: white;
+}
+
+/* Social Media Accounts */
+.social-media-account {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.account {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.account div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.account a {
+    text-decoration: none;
+    color: #87ceeb;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.account a:hover {
+    color: #f2f9f3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .profile-container {
+        width: 95%;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-details {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    .account {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account div {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 15px;
+    }
+
+    .profil-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-info-form input,
+    .profile-info-form textarea {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .save-btn,
+    .cancel-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .account a {
+        font-size: 16px;
+    }
+}

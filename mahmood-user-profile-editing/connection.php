@@ -1,7 +1,7 @@
 <?php
 // Database connection setup
 $host = 'localhost';       // Database host
-$db = 'project_cs333';     // Database name
+$db = 'room_booking';     // Database name
 $user = 'root';            // Database user
 $pass = '';                // Database password (empty for localhost)
 

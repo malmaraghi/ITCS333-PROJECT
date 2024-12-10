@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sheet.css">
     <link rel="stylesheet" href="css/pico.min.css">
+    <link rel="stylesheet" href="Profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Profile Editing</title>
 </head>
@@ -61,7 +61,9 @@
             </div>
         </div>
         <footer class="footer">
-            <div class="social-media-account"><h4>Social Media Accounts</h4></div>
+            <div class="social-media-account">
+                <h3>Social media accounts</h3>
+            </div>
             <div class="account">
                 <div class="twitter"><a href="https://x.com/uobedubh?lang=ar" target="_blank"><i class="fa-brands fa-twitter"></i><h6>Twitter</h6></a></div>
                 <div class="instagram"><a href="https://www.instagram.com/uobedubh/?hl=ar" target="_blank"><i class="fa-brands fa-instagram"></i><h6>Instagram</h6></a></div>
@@ -89,7 +91,6 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Update the displayed profile image
                         document.getElementById('profilePreview').src = data.filePath;
                         document.getElementById('uploadedFilePath').value = data.filePath;
                         alert('Image uploaded successfully!');
