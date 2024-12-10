@@ -214,6 +214,14 @@
             </form>
         </div>
     </div>
+     <!-- Buttons to Add, Edit Rooms -->
+     <section class="content2">
+                <div class="container-fluid2">
+                    <button class="btn btn-add" onclick="openModal('add')">Add Room</button>
+                    <button class="btn btn-edit" onclick="openModal('edit')">Edit Room</button>
+                </div>
+            </section>
+            <br><br><br>
 </body>
 
 </html>
