@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2024 at 04:50 PM
+-- Generation Time: Dec 10, 2024 at 08:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,17 @@ CREATE TABLE `bookings` (
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`booking_id`, `user_id`, `room_id`, `start_time`, `end_time`, `status`) VALUES
+(14, 7, 16, '2024-12-11 10:12:00.000000', '2024-12-11 11:12:00.000000', 'confirmed'),
+(15, 7, 1, '2024-12-11 10:13:00.000000', '2024-12-11 11:13:00.000000', 'confirmed'),
+(16, 7, 43, '2024-12-11 10:36:00.000000', '2024-12-11 11:36:00.000000', 'confirmed'),
+(17, 8, 70, '2024-12-11 10:54:00.000000', '2024-12-11 11:54:00.000000', 'confirmed'),
+(18, 8, 20, '2024-12-26 10:55:00.000000', '2024-12-26 11:55:00.000000', 'confirmed');
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +69,7 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `equipment`, `room_department`, `room_floor`, `status`, `room_type`) VALUES
-(1, 'ITCS-1001', 18, 'Projector, Whiteboard, Air Conditioner', 'ITCS', 1, 'Available', 'Meeting Room'),
+(1, 'ITCS-1001', 18, 'Projector, Whiteboard, Air Conditioner', 'ITCS', 1, 'Occupied', 'Meeting Room'),
 (2, 'ITCS-1002', 50, 'Computers, Air Conditioner', 'ITCS', 1, 'Occupied', 'Computer Lab'),
 (3, 'ITCS-1003', 22, 'Whiteboard, Speakers', 'ITCS', 1, 'Unavailable', 'Lecture Room'),
 (4, 'ITCS-1004', 50, 'Projector, Computers', 'ITCS', 1, 'Available', 'Computer Lab'),
@@ -73,11 +84,11 @@ INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `equipment`, `room_depa
 (13, 'ITCS-1005', 50, 'Computers, Projector', 'ITCS', 1, 'Available', 'Computer Lab'),
 (14, 'ITCS-1006', 22, 'Speakers, Air Conditioner', 'ITCS', 1, 'Unavailable', 'Lecture Room'),
 (15, 'ITCS-1007', 18, 'Whiteboard, Air Conditioner', 'ITCS', 1, 'Occupied', 'Meeting Room'),
-(16, 'ITCS-1008', 22, 'Projector, Whiteboard', 'ITCS', 1, 'Available', 'Lecture Room'),
+(16, 'ITCS-1008', 22, 'Projector, Whiteboard', 'ITCS', 1, 'Occupied', 'Lecture Room'),
 (17, 'ITCS-2005', 50, 'Computers, Whiteboard', 'ITCS', 2, 'Available', 'Computer Lab'),
 (18, 'ITCS-2006', 18, 'Whiteboard, Projector', 'ITCS', 2, 'Occupied', 'Meeting Room'),
 (19, 'ITCS-2007', 50, 'Computers, Air Conditioner', 'ITCS', 2, 'Unavailable', 'Computer Lab'),
-(20, 'ITCS-2008', 22, 'Projector, Speakers', 'ITCS', 2, 'Available', 'Lecture Room'),
+(20, 'ITCS-2008', 22, 'Projector, Speakers', 'ITCS', 2, 'Occupied', 'Lecture Room'),
 (21, 'ITCS-3005', 22, 'Whiteboard, Air Conditioner', 'ITCS', 3, 'Occupied', 'Lecture Room'),
 (22, 'ITCS-3006', 50, 'Computers, Projector', 'ITCS', 3, 'Available', 'Computer Lab'),
 (23, 'ITCS-3007', 18, 'Projector, Whiteboard', 'ITCS', 3, 'Unavailable', 'Meeting Room'),
@@ -100,7 +111,7 @@ INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `equipment`, `room_depa
 (40, 'ITIS-1008', 50, 'Computers, Air Conditioner', 'ITIS', 1, 'Available', 'Computer Lab'),
 (41, 'ITIS-2005', 18, 'Whiteboard, Air Conditioner', 'ITIS', 2, 'Occupied', 'Meeting Room'),
 (42, 'ITIS-2006', 50, 'Computers, Speakers', 'ITIS', 2, 'Unavailable', 'Computer Lab'),
-(43, 'ITIS-2007', 22, 'Projector, Air Conditioner', 'ITIS', 2, 'Available', 'Lecture Room'),
+(43, 'ITIS-2007', 22, 'Projector, Air Conditioner', 'ITIS', 2, 'Occupied', 'Lecture Room'),
 (44, 'ITIS-2008', 50, 'Computers, Whiteboard', 'ITIS', 2, 'Occupied', 'Computer Lab'),
 (45, 'ITIS-3005', 18, 'Projector, Whiteboard', 'ITIS', 3, 'Available', 'Meeting Room'),
 (46, 'ITIS-3006', 50, 'Computers, Air Conditioner', 'ITIS', 3, 'Unavailable', 'Computer Lab'),
@@ -127,7 +138,7 @@ INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `equipment`, `room_depa
 (67, 'ITCE-2007', 22, 'Whiteboard, Speakers', 'ITCE', 2, 'Available', 'Lecture Room'),
 (68, 'ITCE-2008', 50, 'Computers, Air Conditioner', 'ITCE', 2, 'Available', 'Computer Lab'),
 (69, 'ITCE-3005', 22, 'Projector, Whiteboard', 'ITCE', 3, 'Occupied', 'Lecture Room'),
-(70, 'ITCE-3006', 50, 'Computers, Air Conditioner', 'ITCE', 3, 'Available', 'Computer Lab'),
+(70, 'ITCE-3006', 50, 'Computers, Air Conditioner', 'ITCE', 3, 'Occupied', 'Computer Lab'),
 (71, 'ITCE-3007', 18, 'Whiteboard, Projector', 'ITCE', 3, 'Unavailable', 'Meeting Room'),
 (72, 'ITCE-3008', 50, 'Computers, Speakers', 'ITCE', 3, 'Occupied', 'Computer Lab');
 
@@ -143,11 +154,19 @@ CREATE TABLE `users` (
   `phone_number` varchar(20) NOT NULL,
   `picture` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `Contact` varchar(255) NOT NULL,
+  `Major` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `account_type` enum('Admin','User') NOT NULL,
   `comments` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `phone_number`, `picture`, `email`, `Major`, `password`, `account_type`, `comments`) VALUES
+(7, '1234', '', '', '202201234@stu.uob.edu.bh', '', '$2y$10$jyBJYmo83QIka8mbb3go4.M7/lsMNp9546QBrjv/PCcp8uKG1RC0.', 'Admin', ''),
+(8, '9999', '', '', '202205678@stu.uob.edu.bh', '', '$2y$10$8cnt4bzQdEteocpeSqXYC.WU4FT9L9TbFWN2EI7KD7AFyXlrEa/r.', 'User', '');
 
 --
 -- Indexes for dumped tables
@@ -179,7 +198,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `booking_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -191,7 +210,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

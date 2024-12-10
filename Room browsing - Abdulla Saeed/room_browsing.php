@@ -1,12 +1,11 @@
 <?php
 include('db.php');
-session_start();  // Start session to use session data
+session_start();  
 
 $rooms = $pdo->query("SELECT * FROM rooms")->fetchAll(PDO::FETCH_ASSOC);
 $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : '';
 $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : '';
 
-// Get the room type from the GET request
 $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
 ?>
 
@@ -20,27 +19,27 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
     <link rel="stylesheet" href="style1.css">
     <script>
  document.addEventListener('DOMContentLoaded', function () {
-    const rooms = <?php echo json_encode($rooms); ?>; // Rooms data from PHP
+    const rooms = <?php echo json_encode($rooms); ?>; 
     const gridContainer = document.querySelector('.grid-container');
     const modal = document.getElementById('myModal');
     const modalContent = document.querySelector('.modal-content');
     const span = document.querySelector('.close');
     const filterButtons = document.querySelectorAll('.filter-option');
 
-    // Default filter selection (set as active when page loads)
-    const defaultFloor = ''; // Default floor (can be modified as needed)
-    const defaultDepartment = ''; // Default department (can be modified as needed)
+    
+    const defaultFloor = ''; 
+    const defaultDepartment = ''; 
 
-    // Set default active filters
+    
     const defaultFloorButton = document.querySelector(`.filter-option[data-type="floor"][data-value="${defaultFloor}"]`);
     const defaultDepartmentButton = document.querySelector(`.filter-option[data-type="department"][data-value="${defaultDepartment}"]`);
 
     if (defaultFloorButton) defaultFloorButton.classList.add('active');
     if (defaultDepartmentButton) defaultDepartmentButton.classList.add('active');
 
-    // Function to display rooms in the grid
+ 
     function displayRooms(roomsToDisplay) {
-        gridContainer.innerHTML = ''; // Clear existing content
+        gridContainer.innerHTML = ''; 
 
         roomsToDisplay.forEach(room => {
             const roomCard = document.createElement('div');
@@ -51,12 +50,11 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
                 <p><strong>Floor:</strong> ${room.room_floor}</p>
                 <p class="room-status"><strong>Status:</strong> ${room.status}</p>
             `;
-            roomCard.addEventListener('click', () => showRoomDetails(room)); // Attach click handler
+            roomCard.addEventListener('click', () => showRoomDetails(room)); 
             gridContainer.appendChild(roomCard);
         });
     }
 
-    // Function to show room details in the modal
     function showRoomDetails(room) {
         modalContent.innerHTML = `
             <span class="close">&times;</span>
@@ -73,22 +71,22 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
                 <button type="submit">Book Now</button>
             </form>
         `;
-        modal.style.display = 'block'; // Show the modal
+        modal.style.display = 'block'; 
     }
 
-    // Close modal when the close button is clicked
+  
     span.onclick = function () {
         modal.style.display = 'none';
     };
 
-    // Close modal when clicking outside the modal content
+   
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
     };
 
-    // Filter logic
+    
     function filterRooms() {
         const selectedDepartment = document.querySelector('.filter-option[data-type="department"].active')?.dataset.value || '';
         const selectedFloor = document.querySelector('.filter-option[data-type="floor"].active')?.dataset.value || '';
@@ -101,10 +99,10 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
         displayRooms(filteredRooms);
     }
 
-    // Add click event listeners to filter buttons
+   
     filterButtons.forEach(button => {
         button.addEventListener('click', function () {
-            // Toggle active class for the current button
+           
             const type = this.dataset.type;
             const buttonsOfSameType = document.querySelectorAll(`.filter-option[data-type="${type}"]`);
             buttonsOfSameType.forEach(btn => btn.classList.remove('active'));
@@ -114,8 +112,8 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
         });
     });
 
-    // Initial display of rooms
-    displayRooms(rooms); // Display all rooms by default
+
+    displayRooms(rooms); 
 });
 
 
@@ -148,15 +146,15 @@ $roomType = isset($_GET['room_type']) ? $_GET['room_type'] : '';
     <div class="content">
         <h1 class="header">Room Browsing</h1>
         <div class="grid-container">
-            <!-- Room cards will be dynamically inserted here -->
+           
         </div>
     </div>
 
-    <!-- Modal Structure -->
+   
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <!-- Room details will be dynamically inserted here -->
+            
         </div>
     </div>
 </body>

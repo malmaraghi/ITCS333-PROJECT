@@ -98,11 +98,7 @@
                             <td>
                                 <form action='../room-booking-system - Mohamed Almaraghi/cancel.php' method='POST'>
                                     <input type='hidden' name='booking_id' value='{$booking['booking_id']}'>
-<<<<<<< HEAD
                                      <input type='hidden' name='room_id' value='{$booking['room_id']}'>
-=======
-                                    <input type='hidden' name='room_id' value='{$booking['room_id']}'>
->>>>>>> 36b8c7f6116c8d422d0f8026cdfdadbb3b1b33ea
                                     <button type='submit' class='cancel-button'>Cancel</button>
                                 </form>
                             </td>
