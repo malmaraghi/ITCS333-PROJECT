@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2024 at 08:20 PM
+-- Generation Time: Dec 10, 2024 at 04:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,14 +35,6 @@ CREATE TABLE `bookings` (
   `end_time` datetime(6) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `user_id`, `room_id`, `start_time`, `end_time`, `status`) VALUES
-(12, 4, 10, '2024-12-10 08:43:00.000000', '2024-12-10 09:43:00.000000', ''),
-(13, 4, 9, '2024-12-08 10:08:00.000000', '2024-12-08 11:08:00.000000', '');
 
 -- --------------------------------------------------------
 
@@ -156,18 +148,6 @@ CREATE TABLE `users` (
   `account_type` enum('Admin','User') NOT NULL,
   `comments` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `phone_number`, `picture`, `email`, `Contact`, `password`, `account_type`, `comments`) VALUES
-(1, 'try1', '', '/test/IMG-test.jpg', '202204567@stu.uob.edu.bh', '', '$2y$10$KluO0AzejvAsfmu1ximp7.kfrcVFvyQ1stviAYGLcJioNFIiF4zmW', 'User', ''),
-(2, 'ahmed', '', '/uploads/IMG-test.jpg', '202207890@stu.uob.edu.bh', '', '$2y$10$juDLQtZtxR4UJ/60KrWrS.n6bGrvqis8.w/cb.vgChUF9Hac22mNS', 'User', ''),
-(3, 'Mahmood', '34326492', 'uploads/IMG-67528879702244.32288376.jpg', '202209657@stu.uob.edu.bh', 'ggvbvh@gmail.com', '$2y$10$jKD/S.yzYasdfxN03.xlSuLemPYOfnUEk77cF64Nez4WnXOK5yesK', 'User', '1'),
-(4, '1234', '', '', '202201234@stu.uob.edu.bh', '', '$2y$10$Di6HC2PU2K1GkaxRjirFr.1g1JhNgRlJBl2MK3Ldm8RbpmB/3zyIC', 'User', ''),
-(5, '5678', '', '', '202205678@stu.uob.edu.bh', '', '$2y$10$9t49OA3dywIxTjpoT7kC7.oEkWcw2LEeT6U5wFrIV1ruSHlgb9vkm', 'User', ''),
-(6, 'admin', '', '', '202209000@uob.edu.bh', '', '$2y$10$A9hDX39kJtlYIi7/Y0fz4.sA3hxPvqVMq.E0/aDWuPc3sAPMo5QyG', 'Admin', '');
 
 --
 -- Indexes for dumped tables
