@@ -16,13 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $start_timestamp = strtotime($start_date);
     $end_timestamp = strtotime($end_date);
 
-    // Validate end time is later than the start time
     if ($end_timestamp < $start_timestamp) {
         header("Location: ../Room browsing - Abdulla Saeed/index.php?status=invalid_time_order");
         exit();
     }
 
-    // Validate the booking time is within valid hours (8:00 AM to 10:00 PM)
+    // validate the booking time is within valid hours (8:00 AM to 10:00 PM)
     $start_hour = date('H:i', $start_timestamp);
     $end_hour = date('H:i', $end_timestamp);
 
@@ -31,16 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Validate the booking duration does not exceed 2 hours
+    // validate the booking duration does not exceed 2 hours
     $duration = ($end_timestamp - $start_timestamp) / 3600; 
     if ($duration > 2) {
         header("Location: ../Room browsing - Abdulla Saeed/index.php?status=duration_exceeded");
         exit();
     }
 
-    // Check for room status and booking conflicts
     try {
-        // Get room status
+        // get room status
         $stmt = $pdo->prepare("SELECT status FROM rooms WHERE room_id = ?");
         $stmt->execute([$room_id]);
         $room = $stmt->fetch();
@@ -50,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Check for booking conflicts
+        // check for booking conflicts
         $stmt = $pdo->prepare("
             SELECT * FROM bookings 
             WHERE room_id = ? 
@@ -78,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$user_id, $room_id, $start_date, $end_date, 'confirmed']);
 
 
-            // Success message
             header("Location: ../Room browsing - Abdulla Saeed/index.php?status=success");
             exit();
         }
@@ -87,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 } else {
-    // Invalid message
     header("Location: ../Room browsing - Abdulla Saeed/index.php?status=invalid");
     exit();
 }
