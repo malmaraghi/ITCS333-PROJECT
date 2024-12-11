@@ -106,6 +106,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12">
                         <div class="small-box bg-gradient-info">
+                        <!-- <div class="small-box bg-gradient-info" style="min-height: 180px;"> -->
                             <div class="inner">
                                 <h3><?= $totalBookings ?></h3>
                                 <p>Total Bookings</p>
@@ -204,7 +205,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <h2>Rooms by Department</h2>
                 <div class="row">
                     <?php foreach ($departments as $department): ?>
-                        <div class="col-lg-4 col-md-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-12" >
                             <div
                                 class="small-box <?= $department == 'ITIS' ? 'bg-info' : ($department == 'ITCS' ? 'bg-success' : 'bg-warning') ?>">
                                 <div class="inner">
