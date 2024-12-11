@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Users Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="adminstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -42,9 +42,11 @@
                                 <th>User ID</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Major</th>
                                 <th>Phone Number</th>
                                 <th>Account Type</th>
-                                <th>Account Type</th>
+                                <th>Comments</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -64,11 +66,11 @@
                                     echo "<td>" . $row['id'] . "</td>";
                                     echo "<td>" . $row['username'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
+                                    echo "<td>" . $row['Major'] . "</td>";
                                     echo "<td>" . $row['phone_number'] . "</td>";
                                     echo "<td>" . $row['account_type'] . "</td>";
-                                    echo "<td>
-                                    </td>";
-                                    echo "</tr>";
+                                    echo "<td>" . $row['comments'] . "</td>";
+
                                 }
                             } else {
                                 echo "<tr><td colspan='9'>No Users Available</td></tr>";
