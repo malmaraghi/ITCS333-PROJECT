@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Room Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="adminstyle.css">
     <script>
         // Function to open the modal
         function openModal(type, roomId = '') {
@@ -223,5 +223,4 @@
             </section>
             <br><br><br>
 </body>
-
 </html>
