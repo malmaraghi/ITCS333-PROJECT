@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // validate the booking time is within valid hours (8:00 AM to 10:00 PM)
     $start_hour = date('H:i', $start_timestamp);
     $end_hour = date('H:i', $end_timestamp);
 
@@ -30,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // validate the booking duration does not exceed 2 hours
     $duration = ($end_timestamp - $start_timestamp) / 3600; 
     if ($duration > 2) {
         header("Location: ../Room browsing - Abdulla Saeed/index.php?status=duration_exceeded");
@@ -38,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // get room status
         $stmt = $pdo->prepare("SELECT status FROM rooms WHERE room_id = ?");
         $stmt->execute([$room_id]);
         $room = $stmt->fetch();
@@ -48,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // check for booking conflicts
         $stmt = $pdo->prepare("
             SELECT * FROM bookings 
             WHERE room_id = ? 
@@ -64,11 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../Room browsing - Abdulla Saeed/index.php?status=conflict");
             exit();
         } else {
-            // Update room status to "Occupied" when a booking is confirmed
             $stmt = $pdo->prepare("UPDATE rooms SET status = 'Occupied' WHERE room_id = ?");
             $stmt->execute([$room_id]);
 
-            // Insert booking
             $stmt = $pdo->prepare("
                 INSERT INTO bookings (user_id, room_id, start_time, end_time, status) 
                 VALUES (?, ?, ?, ?, ?)
