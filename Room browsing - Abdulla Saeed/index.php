@@ -46,7 +46,8 @@
         'duration_exceeded' => "Bookings cannot exceed 2 hours.",
         'invalid_time_order' => "End time must be later than start time.",
         'error' => "An error occurred. Please try again.",
-        'invalid' => "Invalid request method."
+        'invalid' => "Invalid request method.",
+        'unavailable_room' => "This room is either Unavailable or Occupied!"
       ];
 
       if (isset($messages[$_GET['status']])) {
